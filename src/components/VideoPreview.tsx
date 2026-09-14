@@ -15,15 +15,26 @@ export const VideoPreview: React.FC<VideoPreviewProps> = ({
   posterSrc
 }) => {
   return (
-    <div className="video-card">
-      {videoSrc ? (
-        <video
-          src={videoSrc}
-          poster={posterSrc}
-          controls
-          className="video-element"
-          aria-label={label}
-        />
+    <a
+      href="https://www.instagram.com/jifriflix/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="video-card reel-preview"
+      aria-label={`View JIFRIFLIX Reel - ${label} on Instagram`}
+    >
+      {posterSrc || videoSrc ? (
+        videoSrc ? (
+          <video
+            src={videoSrc}
+            poster={posterSrc}
+            playsInline
+            muted
+            loop
+            className="video-element"
+          />
+        ) : (
+          <img src={posterSrc} alt={label} className="video-element" />
+        )
       ) : (
         <div className="video-placeholder">
           <div className="video-badge">{category}</div>
@@ -35,6 +46,6 @@ export const VideoPreview: React.FC<VideoPreviewProps> = ({
           <div className="video-label">{label}</div>
         </div>
       )}
-    </div>
+    </a>
   );
 };
