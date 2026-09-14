@@ -1,17 +1,15 @@
 import React from 'react';
 import { SectionHeader } from '../components/SectionHeader';
-import { VideoPreview } from '../components/VideoPreview';
+import { BeholdWidget } from '../components/BeholdWidget';
 
 export const CreativeWork: React.FC = () => {
   return (
     <section id="creative">
       <div className="container">
-        <SectionHeader label="05 — Creative" title="Beyond the browser." />
+        <SectionHeader label="05 — Creative" title="Visual Storytelling & Video Content" />
 
-        <div className="creative-grid reveal">
-          <VideoPreview label="Short-form edit" category="JIFRIFLIX" />
-          <VideoPreview label="Visual storytelling" category="JIFRIFLIX" />
-          <VideoPreview label="Creative content" category="JIFRIFLIX" />
+        <div className="reveal">
+          <BeholdWidget feedId="KADbhv9ErmUW70WpLQoy" />
         </div>
 
         <p className="hero-sub reveal" style={{ marginTop: '28px', fontSize: '15px' }}>

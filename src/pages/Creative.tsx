@@ -1,19 +1,13 @@
 import React from 'react';
 import { SEO } from '../components/SEO';
 import { SectionHeader } from '../components/SectionHeader';
-import { VideoPreview } from '../components/VideoPreview';
+import { BeholdWidget } from '../components/BeholdWidget';
 import { useReveal } from '../hooks/useReveal';
 import { Button } from '../components/Button';
 import './Creative.css';
 
 export const Creative: React.FC = () => {
   useReveal();
-
-  const videos = [
-    { label: 'Short-Form Edit', category: 'JIFRIFLIX' },
-    { label: 'Visual Storytelling', category: 'JIFRIFLIX' },
-    { label: 'Creative Content', category: 'JIFRIFLIX' }
-  ];
 
   return (
     <>
@@ -38,14 +32,8 @@ export const Creative: React.FC = () => {
               label="01 — Selected Edits"
               title="Visual Storytelling & Video Content"
             />
-            <div className="creative-showcase-grid reveal">
-              {videos.map((vid) => (
-                <VideoPreview
-                  key={vid.label}
-                  label={vid.label}
-                  category={vid.category}
-                />
-              ))}
+            <div className="reveal">
+              <BeholdWidget feedId="KADbhv9ErmUW70WpLQoy" />
             </div>
           </div>
         </section>
