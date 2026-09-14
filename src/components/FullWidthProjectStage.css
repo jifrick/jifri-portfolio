@@ -60,7 +60,7 @@
 .project-number {
   color: var(--muted);
   font-size: 12px;
-  margin-bottom: 22px;
+  margin-bottom: 14px;
   font-weight: 500;
 }
 
@@ -75,14 +75,14 @@
 
 .category {
   max-width: 300px;
-  margin-top: 20px;
+  margin-top: 16px;
   color: var(--muted);
   font-size: 14px;
   line-height: 1.55;
 }
 
 .status {
-  margin-top: 18px;
+  margin-top: 12px;
   color: var(--muted);
   font-size: 12px;
   display: flex;
@@ -101,7 +101,7 @@
 
 .view {
   display: inline-flex;
-  margin-top: 34px;
+  margin-top: 24px;
   padding-bottom: 5px;
   border-bottom: 1px solid var(--text);
   font-size: 14px;

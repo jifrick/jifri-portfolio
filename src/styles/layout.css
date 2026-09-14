@@ -4,7 +4,7 @@
 }
 
 section {
-  padding: 130px 0;
+  padding: 100px 0;
 }
 
 .section-top {
@@ -13,7 +13,7 @@ section {
   gap: 30px;
   border-top: 1px solid var(--border);
   padding-top: 20px;
-  margin-bottom: 70px;
+  margin-bottom: 48px;
 }
 
 .grid-12 {
@@ -28,12 +28,12 @@ section {
   }
 
   section {
-    padding: 85px 0;
+    padding: 65px 0;
   }
 
   .section-top {
     grid-template-columns: 1fr;
     gap: 14px;
-    margin-bottom: 50px;
+    margin-bottom: 36px;
   }
 }
