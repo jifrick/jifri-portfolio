@@ -54,13 +54,7 @@
   background: #e9e7e0;
   box-shadow: 0 24px 80px rgba(17, 17, 17, 0.09);
   transform: translateZ(0);
-  will-change: opacity, transform;
-  transition: opacity 0.22s var(--ease), transform 0.26s var(--ease);
-}
-
-.project-visual.changing {
-  opacity: 0.18;
-  transform: scale(0.988);
+  transition: background-color 0.15s ease-out;
 }
 
 /* Browser mockup frame */
@@ -71,6 +65,7 @@
   border: 1px solid #d9d8d2;
   border-radius: var(--radius-sm);
   background: #fafaf8;
+  transition: background-color 0.15s ease-out, border-color 0.15s ease-out;
 }
 
 .browser-top {
@@ -83,6 +78,7 @@
   color: #77756f;
   font-size: 11px;
   font-family: monospace;
+  transition: border-color 0.15s ease-out, color 0.15s ease-out;
 }
 
 .browser-dots {
@@ -108,6 +104,7 @@
   background: #20201e;
   margin-bottom: 16px;
   border-radius: 2px;
+  transition: width 0.15s ease-out, height 0.15s ease-out, background-color 0.15s ease-out;
 }
 
 .mock-sub {
@@ -116,12 +113,14 @@
   background: #bebcb6;
   margin-bottom: 32px;
   border-radius: 2px;
+  transition: width 0.15s ease-out, background-color 0.15s ease-out;
 }
 
 .mock-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
+  transition: grid-template-columns 0.15s ease-out;
 }
 
 .mock-card {
@@ -130,6 +129,7 @@
   background: #efeee9;
   border: 1px solid #dddcd6;
   border-radius: 4px;
+  transition: height 0.15s ease-out, background-color 0.15s ease-out, border-color 0.15s ease-out;
 }
 
 .mock-card span {
@@ -139,6 +139,7 @@
   margin-bottom: 9px;
   background: #c5c3bd;
   border-radius: 2px;
+  transition: background-color 0.15s ease-out;
 }
 
 /* Theme variations */
@@ -219,13 +220,6 @@
   align-items: end;
   gap: 30px;
   margin-top: 25px;
-  will-change: opacity, transform;
-  transition: opacity 0.22s var(--ease), transform 0.26s var(--ease);
-}
-
-.project-info.changing {
-  opacity: 0.15;
-  transform: translateY(6px);
 }
 
 .project-title {

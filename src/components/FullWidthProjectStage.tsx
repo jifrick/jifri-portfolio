@@ -21,37 +21,13 @@ const THEME_MAP: Record<string, string> = {
 
 export const FullWidthProjectStage: React.FC = () => {
   const [active, setActive] = useState(0);
-  const [isChanging, setIsChanging] = useState(false);
   const [progress, setProgress] = useState(0);
 
   const showcaseRef = useRef<HTMLElement | null>(null);
-  const animTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const animTimeoutRef2 = useRef<ReturnType<typeof setTimeout> | null>(null);
   const activeRef = useRef(0);
   activeRef.current = active;
 
   const currentProject = PRIMARY_PROJECTS[active] || PRIMARY_PROJECTS[0];
-
-  const changeProject = useCallback((index: number) => {
-    const clampedIndex = Math.max(0, Math.min(PRIMARY_PROJECTS.length - 1, index));
-    if (clampedIndex === activeRef.current) return;
-
-    if (animTimeoutRef.current) clearTimeout(animTimeoutRef.current);
-    if (animTimeoutRef2.current) clearTimeout(animTimeoutRef2.current);
-
-    // Step 1: Smooth fade out (mix transition start)
-    setIsChanging(true);
-
-    // Step 2: Switch project data at mid-mix (100ms)
-    animTimeoutRef.current = setTimeout(() => {
-      setActive(clampedIndex);
-
-      // Step 3: Smooth fade in with new project content
-      animTimeoutRef2.current = setTimeout(() => {
-        setIsChanging(false);
-      }, 120);
-    }, 100);
-  }, []);
 
   const updateFromScroll = useCallback(() => {
     if (!showcaseRef.current) return;
@@ -72,9 +48,9 @@ export const FullWidthProjectStage: React.FC = () => {
     );
 
     if (calculatedIndex !== activeRef.current) {
-      changeProject(calculatedIndex);
+      setActive(calculatedIndex);
     }
-  }, [changeProject]);
+  }, []);
 
   useEffect(() => {
     let ticking = false;
@@ -93,8 +69,6 @@ export const FullWidthProjectStage: React.FC = () => {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      if (animTimeoutRef.current) clearTimeout(animTimeoutRef.current);
-      if (animTimeoutRef2.current) clearTimeout(animTimeoutRef2.current);
     };
   }, [updateFromScroll]);
 
@@ -152,7 +126,7 @@ export const FullWidthProjectStage: React.FC = () => {
           </div>
 
           {/* Large Project Visual */}
-          <div className={`project-visual ${THEME_MAP[currentProject.id] || 'yawmatic'} ${isChanging ? 'changing' : ''}`}>
+          <div className={`project-visual ${THEME_MAP[currentProject.id] || 'yawmatic'}`}>
             <div className="browser">
               <div className="browser-top">
                 <div className="browser-dots">
@@ -174,7 +148,7 @@ export const FullWidthProjectStage: React.FC = () => {
           </div>
 
           {/* Project Information */}
-          <div className={`project-info ${isChanging ? 'changing' : ''}`}>
+          <div className="project-info">
             <div>
               <h2 className="project-title">{currentProject.name}</h2>
               <div className="project-category">{currentProject.category}</div>
