@@ -5,6 +5,20 @@ import './FullWidthProjectStage.css';
 
 const PRIMARY_PROJECTS = PROJECTS.filter((p) => p.isPrimary);
 
+const DOMAIN_MAP: Record<string, string> = {
+  'yawmatic': 'yawmatic.vercel.app',
+  'rental-book': 'ck-rental-book.vercel.app',
+  'webinvite': 'webinvite.in',
+  'badrulhuda': 'badrulhuda.com'
+};
+
+const THEME_MAP: Record<string, string> = {
+  'yawmatic': 'yawmatic',
+  'rental-book': 'rental',
+  'webinvite': 'invite',
+  'badrulhuda': 'academy'
+};
+
 export const FullWidthProjectStage: React.FC = () => {
   const [active, setActive] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -112,7 +126,7 @@ export const FullWidthProjectStage: React.FC = () => {
           </div>
 
           {/* Large Real Project Visual */}
-          <div className="project-visual">
+          <div className={`project-visual ${THEME_MAP[currentProject.id] || 'yawmatic'}`}>
             {currentProject.imageSrc ? (
               <img
                 src={currentProject.imageSrc}
@@ -126,7 +140,7 @@ export const FullWidthProjectStage: React.FC = () => {
                   <div className="browser-dots">
                     <i></i><i></i><i></i>
                   </div>
-                  <span>{currentProject.name.toLowerCase()}.app</span>
+                  <span>{DOMAIN_MAP[currentProject.id] || 'yawmatic.vercel.app'}</span>
                 </div>
                 <div className="mock-content">
                   <div className="mock-title"></div>
