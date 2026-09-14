@@ -114,6 +114,7 @@ export const PROJECTS: Project[] = [
     longDescription: 'YAWMATIC Collective functions as a supporting platform within the YAWMATIC ecosystem. It features user authentication, private database storage, structured application UI, and responsive interaction workflows.',
     role: ['Product Design', 'UI/UX', 'Full-Stack Development', 'Database Schema'],
     techStack: ['React', 'TypeScript', 'Vite', 'Supabase', 'PostgreSQL', 'Supabase Auth', 'Supabase Storage', 'Git', 'GitHub', 'Vercel'],
-    isPrimary: false
+    isPrimary: true,
+    imageSrc: '/assets/projects/yawmatic-collective.webp'
   }
 ];
