@@ -102,57 +102,74 @@ export const FullWidthProjectStage: React.FC = () => {
   return (
     <section className="work-showcase" id="work" ref={showcaseRef}>
       <div className="work-sticky">
-        <div className="work-stage">
-          {/* Header */}
-          <div className="work-header">
-            <div className="section-label">01 — Selected Work</div>
-            <div className="work-counter">
-              {String(active + 1).padStart(2, '0')} / {String(PRIMARY_PROJECTS.length).padStart(2, '0')}
-            </div>
+        <div className="showcase-grid">
+          {/* Top Overlays */}
+          <div className="section-label">Selected Work</div>
+          <div className="counter">
+            {String(active + 1).padStart(2, '0')} / {String(PRIMARY_PROJECTS.length).padStart(2, '0')}
           </div>
 
-          {/* Large Real Project Visual */}
-          <div className="project-visual">
-            {currentProject.imageSrc && (
-              <img
-                src={currentProject.imageSrc}
-                alt={`${currentProject.name} project screenshot`}
-                className="project-image"
-                loading="eager"
-              />
-            )}
-          </div>
-
-          {/* Project Information */}
-          <div className="project-info">
-            <div>
-              <h2 className="project-title">{currentProject.name}</h2>
-              <div className="project-category">{currentProject.category}</div>
-              <div className="project-status">{currentProject.status}</div>
-            </div>
-
-            <Link to={`/work/${currentProject.id}`} className="project-link">
+          {/* Left Column: Project Copy Information */}
+          <div className="project-copy">
+            <div className="project-number">{currentProject.number}</div>
+            <h2 className="project-title">{currentProject.name}</h2>
+            <div className="category">{currentProject.category}</div>
+            <div className="status">{currentProject.status}</div>
+            <Link to={`/work/${currentProject.id}`} className="view">
               View Project ↗
             </Link>
           </div>
 
-          {/* Project Navigation */}
-          <div className="project-navigation" aria-label="Selected projects">
+          {/* Center-Right Column: Large Project Preview */}
+          <div className="preview-wrap">
+            <div className={`preview ${currentProject.id}`}>
+              {currentProject.imageSrc && (
+                <img
+                  src={currentProject.imageSrc}
+                  alt={`${currentProject.name} project screenshot`}
+                  className="project-image"
+                  loading="eager"
+                />
+              )}
+            </div>
+          </div>
+
+          {/* Far-Right Column: Project Navigation */}
+          <aside className="project-navigation" aria-label="Project navigation">
             {PRIMARY_PROJECTS.map((proj, idx) => (
               <button
                 key={proj.id}
                 type="button"
-                className={`project-nav-item ${idx === active ? 'active' : ''}`}
+                className={`project-nav ${idx === active ? 'active' : ''}`}
                 onClick={() => goToProject(idx)}
               >
-                <span className="nav-index">{proj.number}</span>
                 <span>{proj.name}</span>
               </button>
             ))}
-          </div>
 
-          {/* Progress Bar */}
-          <div className="progress-track">
+            <div className="arrows">
+              <button
+                type="button"
+                className="arrow"
+                aria-label="Previous project"
+                onClick={() => goToProject(active - 1)}
+              >
+                ←
+              </button>
+              <button
+                type="button"
+                className="arrow"
+                aria-label="Next project"
+                onClick={() => goToProject(active + 1)}
+              >
+                →
+              </button>
+            </div>
+          </aside>
+
+          {/* Bottom Overlays: Hint & Progress Track */}
+          <div className="hint">Scroll to explore ↓</div>
+          <div className="progress">
             <div className="progress-bar" style={{ width: `${progress * 100}%` }}></div>
           </div>
         </div>
