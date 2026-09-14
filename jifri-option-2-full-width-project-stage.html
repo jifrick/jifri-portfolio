@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="JIFRI — Full-Stack Developer. Digital products, UI/UX and creative technology.">
+<title>JIFRI — Full-Stack Developer</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:#f7f6f2;
+  --text:#111111;
+  --muted:#6b6b67;
+  --border:#dfded8;
+  --accent:#d85a30;
+  --dark:#111111;
+  --dark-text:#f7f6f2;
+  --dark-muted:#a5a5a0;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"Instrument Sans",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button{
+  font:inherit;
+}
+
+img{
+  display:block;
+  max-width:100%;
+}
+
+/* =========================
+   GLOBAL
+========================= */
+
+.container{
+  width:min(1400px,calc(100% - 10vw));
+  margin:0 auto;
+}
+
+.label{
+  font-size:11px;
+  line-height:1;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  font-weight:600;
+}
+
+/* =========================
+   NAV
+========================= */
+
+.nav{
+  position:fixed;
+  inset:0 0 auto;
+  height:76px;
+  z-index:100;
+  transition:
+    background .25s ease,
+    border-color .25s ease;
+  border-bottom:1px solid transparent;
+}
+
+.nav.scrolled{
+  background:rgba(247,246,242,.94);
+  border-color:var(--border);
+  backdrop-filter:blur(12px);
+}
+
+.nav-inner{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-size:21px;
+  line-height:1;
+  font-weight:700;
+  letter-spacing:-.06em;
+}
+
+.orange-dot{
+  display:inline-block;
+  width:6px;
+  height:6px;
+  margin-left:6px;
+  vertical-align:3px;
+  border-radius:50%;
+  background:var(--accent);
+}
+
+.nav-links{
+  display:flex;
+  gap:32px;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.nav-links a{
+  transition:color .2s ease;
+}
+
+.nav-links a:hover{
+  color:var(--text);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:flex-end;
+  padding:150px 0 90px;
+}
+
+.hero h1{
+  margin:24px 0 0;
+  max-width:1050px;
+  font-size:clamp(56px,7.3vw,106px);
+  line-height:.92;
+  letter-spacing:-.07em;
+  font-weight:600;
+}
+
+.hero-copy{
+  max-width:650px;
+  margin-top:34px;
+  color:var(--muted);
+  font-size:19px;
+  line-height:1.55;
+}
+
+.hero-actions{
+  display:flex;
+  gap:12px;
+  margin-top:32px;
+}
+
+.btn{
+  min-height:48px;
+  padding:0 21px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid var(--text);
+  border-radius:999px;
+  font-size:14px;
+  transition:
+    transform .25s var(--ease),
+    background .25s ease,
+    color .25s ease;
+}
+
+.btn.primary{
+  background:var(--text);
+  color:var(--bg);
+}
+
+.btn.secondary{
+  background:transparent;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+/* =========================
+   STICKY SHOWCASE
+========================= */
+
+.work-showcase{
+  /*
+    Four project chapters.
+    Each chapter = one viewport of scroll progress.
+    The inner stage stays fixed while content changes.
+  */
+  height:500vh;
+  position:relative;
+}
+
+.work-sticky{
+  position:sticky;
+  top:0;
+  height:100vh;
+  min-height:720px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+}
+
+.work-stage{
+  width:min(1400px,calc(100% - 10vw));
+  height:min(850px,calc(100vh - 110px));
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  position:relative;
+}
+
+/* Header */
+.work-header{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:26px;
+}
+
+.work-counter{
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* Main screenshot */
+.project-visual{
+  width:100%;
+  position:relative;
+  overflow:hidden;
+  aspect-ratio:16/9;
+  max-height:66vh;
+  border:1px solid #dad9d3;
+  border-radius:5px;
+  background:#e9e7e0;
+  box-shadow:0 24px 80px rgba(17,17,17,.09);
+  transform:translateZ(0);
+  transition:
+    opacity .38s var(--ease),
+    transform .55s var(--ease);
+}
+
+.project-visual.changing{
+  opacity:.18;
+  transform:scale(.987);
+}
+
+/*
+  The visual below is a placeholder browser composition.
+  Replace each project visual with the real screenshot later.
+*/
+.browser{
+  position:absolute;
+  inset:5%;
+  overflow:hidden;
+  border:1px solid #d9d8d2;
+  border-radius:5px;
+  background:#fafaf8;
+}
+
+.browser-top{
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 15px;
+  border-bottom:1px solid #e4e3dd;
+  color:#77756f;
+  font-size:9px;
+}
+
+.browser-dots{
+  display:flex;
+  gap:5px;
+}
+
+.browser-dots i{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#cac8c2;
+}
+
+.mock-content{
+  height:calc(100% - 42px);
+  padding:7%;
+}
+
+.mock-title{
+  width:55%;
+  height:42px;
+  background:#20201e;
+  margin-bottom:16px;
+}
+
+.mock-sub{
+  width:35%;
+  height:8px;
+  background:#bebcb6;
+  margin-bottom:32px;
+}
+
+.mock-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.mock-card{
+  height:180px;
+  padding:14px;
+  background:#efeee9;
+  border:1px solid #dddcd6;
+}
+
+.mock-card span{
+  display:block;
+  width:70%;
+  height:7px;
+  margin-bottom:9px;
+  background:#c5c3bd;
+}
+
+/* YAWMATIC */
+.project-visual.yawmatic .browser{
+  background:#0d0d0c;
+  border-color:#292927;
+}
+
+.project-visual.yawmatic .browser-top{
+  color:#999;
+  border-color:#292927;
+}
+
+.project-visual.yawmatic .mock-title{
+  width:70%;
+  height:55px;
+  background:#f7f6f2;
+}
+
+.project-visual.yawmatic .mock-sub{
+  width:27%;
+  background:var(--accent);
+}
+
+.project-visual.yawmatic .mock-card{
+  background:#151514;
+  border-color:#292927;
+}
+
+.project-visual.yawmatic .mock-card span{
+  background:#575753;
+}
+
+/* RENTAL */
+.project-visual.rental .mock-title{
+  width:40%;
+  height:34px;
+}
+
+.project-visual.rental .mock-grid{
+  grid-template-columns:1.25fr 1fr 1fr 1fr;
+}
+
+.project-visual.rental .mock-card{
+  height:130px;
+}
+
+/* WEBINVITE */
+.project-visual.invite .mock-title{
+  width:45%;
+  height:55px;
+}
+
+.project-visual.invite .mock-grid{
+  grid-template-columns:1fr 1fr;
+}
+
+.project-visual.invite .mock-card{
+  height:205px;
+}
+
+/* BADRULHUDA */
+.project-visual.academy .mock-title{
+  width:65%;
+  height:34px;
+}
+
+.project-visual.academy .mock-grid{
+  grid-template-columns:repeat(4,1fr);
+}
+
+.project-visual.academy .mock-card{
+  height:135px;
+}
+
+/* =========================
+   PROJECT INFO
+========================= */
+
+.project-info{
+  width:100%;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:end;
+  gap:30px;
+  margin-top:25px;
+  transition:
+    opacity .35s var(--ease),
+    transform .45s var(--ease);
+}
+
+.project-info.changing{
+  opacity:.15;
+  transform:translateY(8px);
+}
+
+.project-title{
+  margin:0;
+  font-size:clamp(40px,4.6vw,66px);
+  line-height:.94;
+  letter-spacing:-.065em;
+  font-weight:600;
+}
+
+.project-category{
+  margin-top:11px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.5;
+}
+
+.project-status{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.project-status::before{
+  content:"";
+  display:inline-block;
+  width:6px;
+  height:6px;
+  margin-right:8px;
+  border-radius:50%;
+  background:var(--accent);
+}
+
+.project-link{
+  align-self:end;
+  white-space:nowrap;
+  padding-bottom:5px;
+  border-bottom:1px solid var(--text);
+  font-size:14px;
+  transition:
+    color .2s ease,
+    border-color .2s ease;
+}
+
+.project-link:hover{
+  color:var(--accent);
+  border-color:var(--accent);
+}
+
+/* =========================
+   PROJECT NAV
+========================= */
+
+.project-navigation{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:0;
+  margin-top:27px;
+  border-top:1px solid var(--border);
+  padding-top:14px;
+}
+
+.project-nav-item{
+  flex:1;
+  min-width:0;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:0 14px;
+  border:0;
+  border-right:1px solid var(--border);
+  background:none;
+  color:var(--muted);
+  text-align:left;
+  cursor:pointer;
+  font-size:12px;
+  transition:color .2s ease;
+}
+
+.project-nav-item:first-child{
+  padding-left:0;
+}
+
+.project-nav-item:last-child{
+  border-right:0;
+}
+
+.project-nav-item:hover{
+  color:var(--text);
+}
+
+.project-nav-item.active{
+  color:var(--text);
+  font-weight:600;
+}
+
+.nav-index{
+  color:var(--muted);
+}
+
+.active .nav-index{
+  color:var(--accent);
+}
+
+.progress-track{
+  width:100%;
+  height:1px;
+  margin-top:9px;
+  background:var(--border);
+  overflow:hidden;
+}
+
+.progress-bar{
+  width:0;
+  height:100%;
+  background:var(--text);
+  transform-origin:left;
+}
+
+/* =========================
+   FOLLOWING SECTION
+========================= */
+
+.next-section{
+  min-height:100vh;
+  padding:140px 0;
+  border-top:1px solid var(--border);
+}
+
+.next-section h2{
+  max-width:950px;
+  margin:25px 0 0;
+  font-size:clamp(44px,6vw,90px);
+  line-height:.93;
+  letter-spacing:-.07em;
+  font-weight:600;
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact{
+  min-height:90vh;
+  padding:130px 0;
+  background:var(--dark);
+  color:var(--dark-text);
+  display:flex;
+  align-items:center;
+}
+
+.contact .label{
+  color:var(--dark-muted);
+}
+
+.contact h2{
+  max-width:1000px;
+  margin:25px 0 0;
+  font-size:clamp(52px,7vw,100px);
+  line-height:.9;
+  letter-spacing:-.07em;
+  font-weight:600;
+}
+
+.contact p{
+  max-width:600px;
+  margin:30px 0;
+  color:var(--dark-muted);
+  font-size:18px;
+  line-height:1.6;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  padding:50px 0;
+  background:var(--dark);
+  color:var(--dark-text);
+  border-top:1px solid #2a2a28;
+}
+
+.footer-row{
+  display:flex;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.footer-brand{
+  font-size:24px;
+  font-weight:600;
+  letter-spacing:-.05em;
+}
+
+.footer-sub{
+  margin-top:8px;
+  color:var(--dark-muted);
+  font-size:13px;
+}
+
+.footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:24px;
+  color:var(--dark-muted);
+  font-size:13px;
+}
+
+.footer-links a:hover{
+  color:var(--dark-text);
+}
+
+.copyright{
+  margin-top:45px;
+  padding-top:18px;
+  border-top:1px solid #2a2a28;
+  color:var(--dark-muted);
+  font-size:12px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1050px){
+  .container{
+    width:calc(100% - 48px);
+  }
+
+  .work-stage{
+    width:calc(100% - 48px);
+  }
+
+  .project-visual{
+    max-height:58vh;
+  }
+
+  .project-nav-item{
+    padding:0 8px;
+  }
+}
+
+@media(max-width:700px){
+  .container{
+    width:calc(100% - 40px);
+  }
+
+  .nav{
+    height:68px;
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+  .hero{
+    min-height:90svh;
+    padding:120px 0 60px;
+  }
+
+  .hero h1{
+    font-size:48px;
+  }
+
+  .hero-copy{
+    font-size:16px;
+  }
+
+  .hero-actions{
+    flex-wrap:wrap;
+  }
+
+  /*
+    On mobile the sticky stage remains usable,
+    but project information becomes compact.
+  */
+  .work-showcase{
+    height:480vh;
+  }
+
+  .work-sticky{
+    height:100svh;
+    min-height:650px;
+  }
+
+  .work-stage{
+    width:calc(100% - 40px);
+    height:100%;
+    padding:72px 0 22px;
+    justify-content:center;
+  }
+
+  .work-header{
+    position:absolute;
+    top:20px;
+    left:0;
+    right:0;
+    margin:0;
+  }
+
+  .project-visual{
+    aspect-ratio:4/3;
+    max-height:none;
+    box-shadow:0 15px 45px rgba(17,17,17,.08);
+  }
+
+  .browser{
+    inset:5%;
+  }
+
+  .mock-card{
+    height:100px;
+  }
+
+  .project-info{
+    grid-template-columns:1fr;
+    gap:10px;
+    margin-top:17px;
+  }
+
+  .project-title{
+    font-size:39px;
+  }
+
+  .project-category{
+    font-size:13px;
+  }
+
+  .project-link{
+    width:max-content;
+    margin-top:5px;
+  }
+
+  .project-navigation{
+    overflow-x:auto;
+    scrollbar-width:none;
+    margin-top:18px;
+  }
+
+  .project-navigation::-webkit-scrollbar{
+    display:none;
+  }
+
+  .project-nav-item{
+    flex:0 0 auto;
+    width:auto;
+    border-right:0;
+    padding:0 15px 0 0;
+    white-space:nowrap;
+  }
+
+  .project-nav-item:first-child{
+    padding-left:0;
+  }
+
+  .progress-track{
+    margin-top:9px;
+  }
+
+  .next-section{
+    min-height:80svh;
+    padding:100px 0;
+  }
+
+  .contact{
+    min-height:80svh;
+    padding:100px 0;
+  }
+
+  .footer-row{
+    display:block;
+  }
+
+  .footer-links{
+    margin-top:25px;
+  }
+}
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+  html{
+    scroll-behavior:auto;
+  }
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="#">JIFRI<span class="orange-dot"></span></a>
+
+    <div class="nav-links">
+      <a href="#showcase">Work</a>
+      <a href="#about">About</a>
+      <a href="#creative">Creative</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="label">Full-Stack Developer</div>
+
+      <h1>
+        I build digital products<br>
+        from idea to reality.
+      </h1>
+
+      <p class="hero-copy">
+        Full-Stack Development · UI/UX · Digital Products · Creative Technology
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn primary" href="#showcase">View Work →</a>
+        <a class="btn secondary" href="#about">About Me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT PLACEHOLDER -->
+  <section class="next-section" id="about">
+    <div class="container">
+      <div class="label">01 — About</div>
+      <h2>
+        I learn by building.<br>
+        Technology, design, creativity and entrepreneurship.
+      </h2>
+    </div>
+  </section>
+
+  <!--
+    ==========================================================
+    OPTION 2 — FULL-WIDTH PROJECT STAGE
+
+    The page itself does not visually move while this section
+    is active. The .work-sticky element remains fixed in the
+    viewport and scroll progress changes the project content.
+
+    Project 1 = 0–25%
+    Project 2 = 25–50%
+    Project 3 = 50–75%
+    Project 4 = 75–100%
+
+    After project 4, the sticky section ends and normal page
+    scrolling continues.
+    ==========================================================
+  -->
+
+  <section class="work-showcase" id="showcase">
+
+    <div class="work-sticky">
+
+      <div class="work-stage">
+
+        <div class="work-header">
+          <div class="label">02 — Selected Work</div>
+          <div class="work-counter" id="counter">01 / 04</div>
+        </div>
+
+        <!-- LARGE PROJECT VISUAL -->
+        <div class="project-visual yawmatic" id="visual">
+
+          <div class="browser">
+
+            <div class="browser-top">
+              <div class="browser-dots">
+                <i></i><i></i><i></i>
+              </div>
+
+              <span id="domain">yawmatic.vercel.app</span>
+            </div>
+
+            <div class="mock-content">
+              <div class="mock-title"></div>
+              <div class="mock-sub"></div>
+
+              <div class="mock-grid">
+                <div class="mock-card">
+                  <span></span><span></span>
+                </div>
+
+                <div class="mock-card">
+                  <span></span><span></span>
+                </div>
+
+                <div class="mock-card">
+                  <span></span><span></span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- PROJECT INFORMATION -->
+        <div class="project-info" id="projectInfo">
+
+          <div>
+            <h2 class="project-title" id="title">YAWMATIC</h2>
+
+            <div class="project-category" id="category">
+              Creative Technology · Brand · Digital Experience
+            </div>
+
+            <div class="project-status" id="status">
+              Building
+            </div>
+          </div>
+
+          <a
+            class="project-link"
+            id="projectLink"
+            href="https://yawmatic.vercel.app"
+            target="_blank"
+            rel="noopener"
+          >
+            View Project ↗
+          </a>
+
+        </div>
+
+        <!-- PROJECT NAVIGATION -->
+        <div class="project-navigation" aria-label="Selected projects">
+
+          <button class="project-nav-item active" data-index="0">
+            <span class="nav-index">01</span>
+            <span>YAWMATIC</span>
+          </button>
+
+          <button class="project-nav-item" data-index="1">
+            <span class="nav-index">02</span>
+            <span>Rental Book</span>
+          </button>
+
+          <button class="project-nav-item" data-index="2">
+            <span class="nav-index">03</span>
+            <span>WEBINVITE.IN</span>
+          </button>
+
+          <button class="project-nav-item" data-index="3">
+            <span class="nav-index">04</span>
+            <span>Badrulhuda Academy</span>
+          </button>
+
+        </div>
+
+        <div class="progress-track">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOLLOWING CONTENT -->
+  <section class="next-section" id="creative">
+    <div class="container">
+      <div class="label">03 — Creative</div>
+      <h2>
+        Beyond the browser.<br>
+        Technology, design and creative work.
+      </h2>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="label">04 — Contact</div>
+
+      <h2>
+        Let's build<br>
+        something real.
+      </h2>
+
+      <p>
+        Have an idea worth building? Let's turn it into something real.
+      </p>
+
+      <a class="btn" style="background:#f7f6f2;color:#111;border-color:#f7f6f2" href="#">
+        Start a Conversation ↗
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+
+    <div class="footer-row">
+
+      <div>
+        <div class="footer-brand">
+          JIFRI<span class="orange-dot"></span>
+        </div>
+
+        <div class="footer-sub">
+          Full-Stack Developer · Digital Product Builder
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <a href="#showcase">Work</a>
+        <a href="#about">About</a>
+        <a href="#creative">Creative</a>
+        <a href="#contact">Contact</a>
+        <a href="https://github.com/jifrick" target="_blank" rel="noopener">GitHub</a>
+      </div>
+
+    </div>
+
+    <div class="copyright">
+      © 2026 Jifri
+    </div>
+
+  </div>
+</footer>
+
+<script>
+const projects = [
+  {
+    title: "YAWMATIC",
+    category: "Creative Technology · Brand · Digital Experience",
+    status: "Building",
+    domain: "yawmatic.vercel.app",
+    url: "https://yawmatic.vercel.app",
+    theme: "yawmatic"
+  },
+  {
+    title: "Rental Book",
+    category: "Rental Management · SaaS · Full-Stack Product",
+    status: "Building",
+    domain: "ck-rental-book.vercel.app",
+    url: "https://ck-rental-book.vercel.app",
+    theme: "rental"
+  },
+  {
+    title: "WEBINVITE.IN",
+    category: "Event Technology · Digital Product · Web Experiences",
+    status: "Preparing for launch",
+    domain: "webinvite.in",
+    url: "https://webinvitein.vercel.app",
+    theme: "invite"
+  },
+  {
+    title: "Badrulhuda Academy",
+    category: "Institutional Website · Client Project",
+    status: "Live",
+    domain: "badrulhuda.com",
+    url: "https://www.badrulhuda.com",
+    theme: "academy"
+  }
+];
+
+const showcase = document.querySelector(".work-showcase");
+const visual = document.getElementById("visual");
+const info = document.getElementById("projectInfo");
+const title = document.getElementById("title");
+const category = document.getElementById("category");
+const status = document.getElementById("status");
+const domain = document.getElementById("domain");
+const projectLink = document.getElementById("projectLink");
+const counter = document.getElementById("counter");
+const progressBar = document.getElementById("progressBar");
+const navItems = [...document.querySelectorAll(".project-nav-item")];
+
+let active = 0;
+let scrollTicking = false;
+
+function updateProject(index, animate = true) {
+  index = Math.max(0, Math.min(projects.length - 1, index));
+
+  if (index === active && animate) return;
+
+  const project = projects[index];
+
+  if (animate) {
+    visual.classList.add("changing");
+    info.classList.add("changing");
+
+    setTimeout(() => {
+      title.textContent = project.title;
+      category.textContent = project.category;
+      status.textContent = project.status;
+      domain.textContent = project.domain;
+      projectLink.href = project.url;
+      counter.textContent =
+        String(index + 1).padStart(2, "0") + " / 04";
+
+      visual.className = "project-visual " + project.theme;
+
+      navItems.forEach((item, itemIndex) => {
+        item.classList.toggle("active", itemIndex === index);
+      });
+
+      requestAnimationFrame(() => {
+        visual.classList.remove("changing");
+        info.classList.remove("changing");
+      });
+    }, 150);
+  } else {
+    title.textContent = project.title;
+    category.textContent = project.category;
+    status.textContent = project.status;
+    domain.textContent = project.domain;
+    projectLink.href = project.url;
+    counter.textContent =
+      String(index + 1).padStart(2, "0") + " / 04";
+
+    visual.className = "project-visual " + project.theme;
+
+    navItems.forEach((item, itemIndex) => {
+      item.classList.toggle("active", itemIndex === index);
+    });
+  }
+
+  active = index;
+}
+
+function getShowcaseProgress() {
+  const rect = showcase.getBoundingClientRect();
+
+  const scrollDistance =
+    showcase.offsetHeight - window.innerHeight;
+
+  if (scrollDistance <= 0) return 0;
+
+  return Math.max(
+    0,
+    Math.min(0.999999, -rect.top / scrollDistance)
+  );
+}
+
+function updateFromScroll() {
+  const progress = getShowcaseProgress();
+
+  /*
+    Four equal scroll zones.
+    The sticky showcase remains visually fixed.
+    Only the project changes.
+  */
+  const index = Math.min(
+    projects.length - 1,
+    Math.floor(progress * projects.length)
+  );
+
+  progressBar.style.width = `${progress * 100}%`;
+
+  if (index !== active) {
+    updateProject(index);
+  }
+
+  scrollTicking = false;
+}
+
+window.addEventListener("scroll", () => {
+  if (!scrollTicking) {
+    requestAnimationFrame(updateFromScroll);
+    scrollTicking = true;
+  }
+}, { passive: true });
+
+/*
+  Clicking a project moves the page to that project's
+  scroll chapter. The sticky stage then displays it.
+*/
+function goToProject(index) {
+  index = Math.max(0, Math.min(projects.length - 1, index));
+
+  const distance =
+    showcase.offsetHeight - window.innerHeight;
+
+  const target =
+    showcase.offsetTop +
+    (index / projects.length) * distance;
+
+  window.scrollTo({
+    top: target,
+    behavior: "smooth"
+  });
+}
+
+navItems.forEach(item => {
+  item.addEventListener("click", () => {
+    goToProject(Number(item.dataset.index));
+  });
+});
+
+/*
+  Keyboard navigation.
+  Arrow keys are intentionally limited to the showcase.
+*/
+window.addEventListener("keydown", event => {
+  const tag = document.activeElement?.tagName;
+
+  if (tag === "INPUT" || tag === "TEXTAREA") return;
+
+  const rect = showcase.getBoundingClientRect();
+  const insideShowcase =
+    rect.top <= window.innerHeight &&
+    rect.bottom >= 0;
+
+  if (!insideShowcase) return;
+
+  if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+    event.preventDefault();
+    goToProject(active + 1);
+  }
+
+  if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+    event.preventDefault();
+    goToProject(active - 1);
+  }
+});
+
+/* Navbar scroll state */
+const nav = document.getElementById("nav");
+
+window.addEventListener("scroll", () => {
+  nav.classList.toggle("scrolled", window.scrollY > 12);
+}, { passive: true });
+
+updateProject(0, false);
+updateFromScroll();
+</script>
+
+</body>
+</html>
