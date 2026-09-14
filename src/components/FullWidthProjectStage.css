@@ -119,53 +119,27 @@
   grid-column: 3;
   width: 100%;
   min-width: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .preview {
   width: 100%;
+  aspect-ratio: 16 / 10;
   position: relative;
   overflow: hidden;
-  border: 1px solid #dad9d3;
   border-radius: 6px;
-  background: #e9e7e0;
-  box-shadow: 0 22px 70px rgba(17, 17, 17, 0.10);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: transparent;
+  box-shadow: 0 20px 60px rgba(17, 17, 17, 0.12);
   transform: translateZ(0);
   transition: opacity 0.35s var(--ease), transform 0.45s var(--ease);
-}
-
-.preview.yawmatic {
-  background: #0d0d0c;
-  border-color: #262624;
-}
-
-.preview.rental-book {
-  background: #efeee9;
-  border-color: #dad9d3;
-}
-
-.preview.webinvite {
-  background: #030a16;
-  border-color: #121c2d;
-}
-
-.preview.badrulhuda {
-  background: #efeee9;
-  border-color: #dad9d3;
 }
 
 .project-image {
   display: block;
   width: 100%;
-  height: auto;
-  max-height: min(600px, calc(100vh - 160px));
-  object-fit: contain;
-  border-radius: 5px;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 6px;
 }
 
 /* FAR-RIGHT COLUMN: PROJECT NAVIGATION */
