@@ -31,23 +31,18 @@ export const FullWidthProjectStage: React.FC = () => {
 
   const currentProject = PRIMARY_PROJECTS[active] || PRIMARY_PROJECTS[0];
 
-  const changeProject = useCallback((index: number, animate = true) => {
+  const changeProject = useCallback((index: number) => {
     const clampedIndex = Math.max(0, Math.min(PRIMARY_PROJECTS.length - 1, index));
-    if (clampedIndex === activeRef.current && animate) return;
+    if (clampedIndex === activeRef.current) return;
 
-    if (animate) {
-      setIsChanging(true);
-      if (animTimeoutRef.current) clearTimeout(animTimeoutRef.current);
+    // Instant content update on scroll threshold breach
+    setActive(clampedIndex);
+    setIsChanging(true);
 
-      animTimeoutRef.current = setTimeout(() => {
-        setActive(clampedIndex);
-        requestAnimationFrame(() => {
-          setIsChanging(false);
-        });
-      }, 150);
-    } else {
-      setActive(clampedIndex);
-    }
+    if (animTimeoutRef.current) clearTimeout(animTimeoutRef.current);
+    animTimeoutRef.current = setTimeout(() => {
+      setIsChanging(false);
+    }, 180);
   }, []);
 
   const updateFromScroll = useCallback(() => {
@@ -69,7 +64,7 @@ export const FullWidthProjectStage: React.FC = () => {
     );
 
     if (calculatedIndex !== activeRef.current) {
-      changeProject(calculatedIndex, true);
+      changeProject(calculatedIndex);
     }
   }, [changeProject]);
 

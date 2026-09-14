@@ -54,12 +54,13 @@
   background: #e9e7e0;
   box-shadow: 0 24px 80px rgba(17, 17, 17, 0.09);
   transform: translateZ(0);
-  transition: opacity 0.38s var(--ease), transform 0.55s var(--ease);
+  will-change: opacity, transform;
+  transition: opacity 0.18s ease-out, transform 0.22s ease-out;
 }
 
 .project-visual.changing {
-  opacity: 0.18;
-  transform: scale(0.987);
+  opacity: 0.25;
+  transform: scale(0.992);
 }
 
 /* Browser mockup frame */
@@ -218,12 +219,13 @@
   align-items: end;
   gap: 30px;
   margin-top: 25px;
-  transition: opacity 0.35s var(--ease), transform 0.45s var(--ease);
+  will-change: opacity, transform;
+  transition: opacity 0.18s ease-out, transform 0.22s ease-out;
 }
 
 .project-info.changing {
-  opacity: 0.15;
-  transform: translateY(8px);
+  opacity: 0.2;
+  transform: translateY(4px);
 }
 
 .project-title {
@@ -340,7 +342,7 @@
   height: 100%;
   background: var(--text);
   transform-origin: left;
-  transition: width 0.1s linear;
+  transition: none; /* Instant 1:1 scroll tracking */
 }
 
 /* Responsive Overrides */
