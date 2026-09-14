@@ -5,20 +5,6 @@ import './FullWidthProjectStage.css';
 
 const PRIMARY_PROJECTS = PROJECTS.filter((p) => p.isPrimary);
 
-const DOMAIN_MAP: Record<string, string> = {
-  'yawmatic': 'yawmatic.vercel.app',
-  'rental-book': 'ck-rental-book.vercel.app',
-  'webinvite': 'webinvite.in',
-  'badrulhuda': 'badrulhuda.com'
-};
-
-const THEME_MAP: Record<string, string> = {
-  'yawmatic': 'yawmatic',
-  'rental-book': 'rental',
-  'webinvite': 'invite',
-  'badrulhuda': 'academy'
-};
-
 export const FullWidthProjectStage: React.FC = () => {
   const [active, setActive] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -125,26 +111,29 @@ export const FullWidthProjectStage: React.FC = () => {
             </div>
           </div>
 
-          {/* Large Project Visual */}
-          <div className={`project-visual ${THEME_MAP[currentProject.id] || 'yawmatic'}`}>
-            <div className="browser">
-              <div className="browser-top">
-                <div className="browser-dots">
-                  <i></i><i></i><i></i>
+          {/* Large Real Project Visual */}
+          <div className="project-visual">
+            {currentProject.imageSrc ? (
+              <img
+                src={currentProject.imageSrc}
+                alt={`${currentProject.name} project screenshot`}
+                className="showcase-real-image"
+                loading="eager"
+              />
+            ) : (
+              <div className="browser">
+                <div className="browser-top">
+                  <div className="browser-dots">
+                    <i></i><i></i><i></i>
+                  </div>
+                  <span>{currentProject.name.toLowerCase()}.app</span>
                 </div>
-                <span>{DOMAIN_MAP[currentProject.id] || 'yawmatic.vercel.app'}</span>
-              </div>
-
-              <div className="mock-content">
-                <div className="mock-title"></div>
-                <div className="mock-sub"></div>
-                <div className="mock-grid">
-                  <div className="mock-card"><span></span><span></span></div>
-                  <div className="mock-card"><span></span><span></span></div>
-                  <div className="mock-card"><span></span><span></span></div>
+                <div className="mock-content">
+                  <div className="mock-title"></div>
+                  <div className="mock-sub"></div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Project Information */}
