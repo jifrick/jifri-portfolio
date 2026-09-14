@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JIFRI — Project Showcase</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:#f7f6f2;
+  --text:#111111;
+  --muted:#6b6b67;
+  --border:#deddd7;
+  --accent:#d85a30;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"Instrument Sans",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+
+.container{
+  width:min(1400px,calc(100% - 10vw));
+  margin:auto;
+}
+
+/* NAV */
+.nav{
+  position:fixed;
+  z-index:100;
+  top:0;left:0;right:0;
+  height:76px;
+  transition:.25s ease;
+}
+.nav.scrolled{
+  background:rgba(247,246,242,.94);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);
+}
+.nav-inner{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo{
+  font-size:21px;
+  font-weight:700;
+  letter-spacing:-.06em;
+}
+.dot{
+  display:inline-block;
+  width:6px;height:6px;
+  margin-left:6px;
+  border-radius:50%;
+  background:var(--accent);
+}
+.nav-links{
+  display:flex;
+  gap:32px;
+  font-size:14px;
+  color:var(--muted);
+}
+.nav-links a:hover{color:var(--text)}
+
+/* INTRO */
+.intro{
+  min-height:100vh;
+  display:flex;
+  align-items:flex-end;
+  padding:150px 0 90px;
+}
+.eyebrow{
+  margin-bottom:24px;
+  font-size:12px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+}
+h1{
+  margin:0;
+  max-width:1000px;
+  font-size:clamp(54px,7.4vw,104px);
+  line-height:.93;
+  letter-spacing:-.07em;
+  font-weight:600;
+}
+.intro p{
+  max-width:650px;
+  margin:32px 0 0;
+  color:var(--muted);
+  font-size:18px;
+  line-height:1.55;
+}
+
+/* STICKY SHOWCASE */
+.showcase{
+  height:520vh;
+  position:relative;
+}
+.sticky{
+  position:sticky;
+  top:0;
+  height:100vh;
+  min-height:700px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+}
+
+/*
+  Balanced desktop composition:
+  number 5%
+  copy 25%
+  preview 54%
+  navigation 16%
+*/
+.showcase-grid{
+  position:relative;
+  width:min(1500px,calc(100% - 8vw));
+  height:min(790px,calc(100vh - 120px));
+  margin:auto;
+  display:grid;
+  grid-template-columns:70px minmax(290px,.82fr) minmax(620px,1.75fr) 180px;
+  column-gap:28px;
+  align-items:center;
+}
+
+/* TOP LABEL */
+.section-label{
+  position:absolute;
+  top:0;
+  left:0;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.counter{
+  position:absolute;
+  top:0;
+  left:70px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+/* COPY */
+.project-copy{
+  grid-column:2;
+  align-self:center;
+  min-width:0;
+  padding-top:10px;
+}
+.project-number{
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:22px;
+}
+.project-title{
+  margin:0;
+  font-size:clamp(44px,4vw,66px);
+  line-height:.94;
+  letter-spacing:-.065em;
+  font-weight:600;
+  overflow-wrap:anywhere;
+}
+.category{
+  max-width:300px;
+  margin-top:20px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.55;
+}
+.status{
+  margin-top:18px;
+  color:var(--muted);
+  font-size:12px;
+}
+.status::before{
+  content:"";
+  display:inline-block;
+  width:6px;height:6px;
+  margin-right:8px;
+  border-radius:50%;
+  background:var(--accent);
+}
+.view{
+  display:inline-flex;
+  margin-top:34px;
+  padding-bottom:5px;
+  border-bottom:1px solid var(--text);
+  font-size:14px;
+  transition:.25s ease;
+}
+.view:hover{
+  color:var(--accent);
+  border-color:var(--accent);
+}
+
+/* LARGE PREVIEW */
+.preview-wrap{
+  grid-column:3;
+  width:100%;
+  min-width:0;
+}
+.preview{
+  width:100%;
+  aspect-ratio:16/10;
+  position:relative;
+  overflow:hidden;
+  border:1px solid #dad9d3;
+  border-radius:5px;
+  background:#e9e7e0;
+  box-shadow:0 22px 70px rgba(17,17,17,.10);
+  transition:opacity .35s var(--ease),transform .45s var(--ease);
+}
+.preview.changing{
+  opacity:.2;
+  transform:scale(.985);
+}
+.browser{
+  position:absolute;
+  inset:5.5%;
+  overflow:hidden;
+  border:1px solid #d9d8d2;
+  border-radius:5px;
+  background:#fafaf8;
+}
+.browser-top{
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 15px;
+  border-bottom:1px solid #e5e4de;
+  color:#77756f;
+  font-size:9px;
+}
+.browser-dots{display:flex;gap:5px}
+.browser-dots i{
+  width:7px;height:7px;
+  border-radius:50%;
+  background:#cac8c2;
+}
+.mock{
+  height:calc(100% - 42px);
+  padding:7%;
+}
+.mock-title{
+  width:58%;
+  height:30px;
+  background:#20201e;
+  margin-bottom:14px;
+}
+.mock-sub{
+  width:38%;
+  height:8px;
+  background:#c1bfb9;
+  margin-bottom:32px;
+}
+.mock-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.mock-card{
+  height:150px;
+  padding:12px;
+  background:#efeee9;
+  border:1px solid #dddcd6;
+}
+.mock-card span{
+  display:block;
+  width:72%;
+  height:7px;
+  margin-bottom:9px;
+  background:#c7c5bf;
+}
+
+/* Project-specific preview themes */
+.preview.yawmatic .browser{
+  background:#0e0e0d;
+  border-color:#292927;
+}
+.preview.yawmatic .browser-top{
+  border-color:#292927;
+  color:#999;
+}
+.preview.yawmatic .mock-title{
+  width:70%;
+  height:44px;
+  background:#f7f6f2;
+}
+.preview.yawmatic .mock-sub{
+  width:30%;
+  background:#d85a30;
+}
+.preview.yawmatic .mock-card{
+  background:#151514;
+  border-color:#2b2b29;
+}
+.preview.yawmatic .mock-card span{background:#575753}
+
+.preview.rental .mock-title{width:42%;height:26px}
+.preview.rental .mock-grid{grid-template-columns:1.25fr 1fr 1fr 1fr}
+.preview.rental .mock-card{height:100px}
+
+.preview.invite .mock-title{width:48%;height:46px}
+.preview.invite .mock-grid{grid-template-columns:1fr 1fr}
+.preview.invite .mock-card{height:165px}
+
+.preview.academy .mock-title{width:65%;height:30px}
+.preview.academy .mock-grid{grid-template-columns:repeat(4,1fr)}
+.preview.academy .mock-card{height:110px}
+
+/* RIGHT NAV */
+.project-navigation{
+  grid-column:4;
+  align-self:center;
+  border-left:1px solid var(--border);
+  padding-left:20px;
+}
+.project-nav{
+  display:block;
+  width:100%;
+  padding:10px 0;
+  border:0;
+  background:none;
+  color:var(--muted);
+  text-align:left;
+  cursor:pointer;
+  font-size:13px;
+  transition:.2s ease;
+}
+.project-nav:hover{color:var(--text)}
+.project-nav.active{
+  color:var(--text);
+  font-weight:600;
+}
+.project-nav.active::before{
+  content:"";
+  display:inline-block;
+  width:5px;height:5px;
+  margin-right:8px;
+  vertical-align:2px;
+  border-radius:50%;
+  background:var(--accent);
+}
+.arrows{
+  display:flex;
+  gap:10px;
+  margin-top:24px;
+}
+.arrow{
+  width:42px;height:42px;
+  border:1px solid var(--border);
+  border-radius:50%;
+  background:transparent;
+  cursor:pointer;
+  font-size:17px;
+  transition:.2s ease;
+}
+.arrow:hover{
+  border-color:var(--text);
+  transform:translateY(-2px);
+}
+.hint{
+  position:absolute;
+  right:0;
+  bottom:0;
+  color:var(--muted);
+  font-size:11px;
+}
+.progress{
+  position:absolute;
+  left:70px;
+  right:180px;
+  bottom:0;
+  height:1px;
+  background:var(--border);
+  overflow:hidden;
+}
+.progress-bar{
+  width:0;
+  height:100%;
+  background:var(--text);
+  transform-origin:left;
+}
+
+/* OUTRO */
+.outro{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  padding:120px 0;
+  background:#111;
+  color:#f7f6f2;
+}
+.outro h2{
+  max-width:950px;
+  margin:20px 0 0;
+  font-size:clamp(50px,7vw,100px);
+  line-height:.92;
+  letter-spacing:-.07em;
+}
+.outro p{
+  max-width:620px;
+  margin-top:30px;
+  color:#a5a5a0;
+  font-size:18px;
+  line-height:1.6;
+}
+
+/* TABLET */
+@media(max-width:1150px){
+  .showcase-grid{
+    width:min(1200px,calc(100% - 7vw));
+    grid-template-columns:50px minmax(230px,.75fr) minmax(480px,1.55fr) 150px;
+    column-gap:18px;
+  }
+  .counter{left:50px}
+  .project-title{font-size:48px}
+  .project-navigation{padding-left:15px}
+  .progress{left:50px;right:150px}
+}
+
+/* SMALLER TABLET */
+@media(max-width:900px){
+  .showcase{
+    height:520vh;
+  }
+  .sticky{
+    min-height:0;
+  }
+  .showcase-grid{
+    width:calc(100% - 48px);
+    height:calc(100vh - 110px);
+    grid-template-columns:50px 1fr;
+    grid-template-rows:auto 1fr auto;
+    row-gap:18px;
+  }
+  .project-copy{
+    grid-column:2;
+    grid-row:1;
+    padding-top:20px;
+  }
+  .project-title{font-size:44px}
+  .category,.status,.view{display:none}
+  .preview-wrap{
+    grid-column:2;
+    grid-row:2;
+  }
+  .project-navigation{
+    grid-column:2;
+    grid-row:3;
+    border-left:0;
+    border-top:1px solid var(--border);
+    padding:12px 0 0;
+    display:flex;
+    gap:18px;
+    overflow-x:auto;
+  }
+  .project-nav{
+    width:auto;
+    flex:0 0 auto;
+    white-space:nowrap;
+  }
+  .arrows{display:none}
+  .hint,.progress{display:none}
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  .container{width:calc(100% - 40px)}
+  .nav{height:68px}
+  .nav-links{display:none}
+  .intro{padding:120px 0 60px}
+  h1{font-size:48px}
+  .intro p{font-size:16px}
+  .showcase{height:480vh}
+  .sticky{
+    height:100svh;
+    min-height:620px;
+  }
+  .showcase-grid{
+    width:calc(100% - 40px);
+    height:100%;
+    padding:58px 0 24px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:stretch;
+    gap:14px;
+  }
+  .section-label{top:17px}
+  .counter{top:17px;left:auto;right:0}
+  .project-copy{order:1;padding:0}
+  .project-title{font-size:40px}
+  .category,.status,.view{display:block}
+  .category{font-size:13px;margin-top:14px}
+  .status{margin-top:12px}
+  .view{margin-top:20px}
+  .preview-wrap{order:2}
+  .preview{box-shadow:0 12px 40px rgba(17,17,17,.08)}
+  .project-navigation{
+    order:3;
+    display:flex;
+    border-top:1px solid var(--border);
+    padding:10px 0 0;
+    gap:18px;
+  }
+  .project-nav{font-size:12px}
+}
+
+/* ACCESSIBILITY */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    transition-duration:.01ms!important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="logo">JIFRI<span class="dot"></span></a>
+    <div class="nav-links">
+      <a href="#showcase">Work</a>
+      <a href="#">About</a>
+      <a href="#">Creative</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<section class="intro">
+  <div class="container">
+    <div class="eyebrow">Full-Stack Developer</div>
+    <h1>I build digital products<br>from idea to reality.</h1>
+    <p>
+      A sticky project showcase prototype for JIFRI.
+      Scroll through the Work section and the projects change inside
+      the fixed presentation instead of the whole section moving away.
+    </p>
+  </div>
+</section>
+
+<section class="showcase" id="showcase">
+  <div class="sticky">
+    <div class="showcase-grid">
+
+      <div class="section-label">Selected Work</div>
+      <div class="counter" id="counter">01 / 04</div>
+
+      <div class="project-copy" id="copy">
+        <div class="project-number" id="projectNumber">01</div>
+        <h2 class="project-title" id="title">YAWMATIC</h2>
+        <div class="category" id="category">Creative Technology · Brand · Digital Experience</div>
+        <div class="status" id="status">Building</div>
+        <a class="view" id="view" href="https://yawmatic.vercel.app" target="_blank" rel="noopener">View Project ↗</a>
+      </div>
+
+      <div class="preview-wrap">
+        <div class="preview yawmatic" id="preview">
+          <div class="browser">
+            <div class="browser-top">
+              <div class="browser-dots"><i></i><i></i><i></i></div>
+              <span id="domain">yawmatic.vercel.app</span>
+            </div>
+            <div class="mock">
+              <div class="mock-title"></div>
+              <div class="mock-sub"></div>
+              <div class="mock-grid">
+                <div class="mock-card"><span></span><span></span></div>
+                <div class="mock-card"><span></span><span></span></div>
+                <div class="mock-card"><span></span><span></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="project-navigation" aria-label="Project navigation">
+        <button class="project-nav active" data-index="0">YAWMATIC</button>
+        <button class="project-nav" data-index="1">Rental Book</button>
+        <button class="project-nav" data-index="2">WEBINVITE.IN</button>
+        <button class="project-nav" data-index="3">Badrulhuda Academy</button>
+
+        <div class="arrows">
+          <button class="arrow" id="prev" aria-label="Previous project">←</button>
+          <button class="arrow" id="next" aria-label="Next project">→</button>
+        </div>
+      </aside>
+
+      <div class="hint">Scroll to explore ↓</div>
+
+      <div class="progress">
+        <div class="progress-bar" id="progress"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="outro" id="contact">
+  <div class="container">
+    <div class="section-label" style="color:#a5a5a0">Contact</div>
+    <h2>Let's build<br>something real.</h2>
+    <p>Have an idea worth building? Let's turn it into something real.</p>
+  </div>
+</section>
+
+</main>
+
+<script>
+const projects = [
+  {
+    title:"YAWMATIC",
+    category:"Creative Technology · Brand · Digital Experience",
+    status:"Building",
+    domain:"yawmatic.vercel.app",
+    url:"https://yawmatic.vercel.app",
+    theme:"yawmatic"
+  },
+  {
+    title:"Rental Book",
+    category:"Rental Management · SaaS · Full-Stack Product",
+    status:"Building",
+    domain:"ck-rental-book.vercel.app",
+    url:"https://ck-rental-book.vercel.app",
+    theme:"rental"
+  },
+  {
+    title:"WEBINVITE.IN",
+    category:"Event Technology · Digital Product · Web Experiences",
+    status:"Preparing for launch",
+    domain:"webinvite.in",
+    url:"https://webinvitein.vercel.app",
+    theme:"invite"
+  },
+  {
+    title:"Badrulhuda Academy",
+    category:"Institutional Website · Client Project",
+    status:"Live",
+    domain:"badrulhuda.com",
+    url:"https://www.badrulhuda.com",
+    theme:"academy"
+  }
+];
+
+const showcase=document.querySelector(".showcase");
+const title=document.getElementById("title");
+const category=document.getElementById("category");
+const status=document.getElementById("status");
+const domain=document.getElementById("domain");
+const view=document.getElementById("view");
+const counter=document.getElementById("counter");
+const projectNumber=document.getElementById("projectNumber");
+const preview=document.getElementById("preview");
+const progress=document.getElementById("progress");
+const navItems=[...document.querySelectorAll(".project-nav")];
+
+let active=0;
+let ticking=false;
+
+function setProject(index, animate=true){
+  index=Math.max(0,Math.min(projects.length-1,index));
+  if(index===active && animate)return;
+
+  const p=projects[index];
+
+  if(animate){
+    preview.classList.add("changing");
+    document.getElementById("copy").animate(
+      [
+        {opacity:1,transform:"translateY(0)"},
+        {opacity:0,transform:"translateY(12px)"},
+        {opacity:1,transform:"translateY(0)"}
+      ],
+      {duration:420,easing:"cubic-bezier(.22,1,.36,1)"}
+    );
+
+    setTimeout(()=>preview.classList.remove("changing"),220);
+  }
+
+  active=index;
+  title.textContent=p.title;
+  category.textContent=p.category;
+  status.textContent=p.status;
+  domain.textContent=p.domain;
+  view.href=p.url;
+  projectNumber.textContent=String(index+1).padStart(2,"0");
+  counter.textContent=String(index+1).padStart(2,"0")+" / 04";
+
+  preview.className="preview "+p.theme;
+
+  navItems.forEach((item,i)=>{
+    item.classList.toggle("active",i===index);
+  });
+}
+
+function getProgress(){
+  const rect=showcase.getBoundingClientRect();
+  const distance=showcase.offsetHeight-window.innerHeight;
+  return Math.max(0,Math.min(0.999999,-rect.top/distance));
+}
+
+function update(){
+  const p=getProgress();
+  const index=Math.min(3,Math.floor(p*4));
+
+  progress.style.width=(p*100)+"%";
+
+  if(index!==active)setProject(index);
+
+  ticking=false;
+}
+
+window.addEventListener("scroll",()=>{
+  if(!ticking){
+    requestAnimationFrame(update);
+    ticking=true;
+  }
+},{passive:true});
+
+/* Click project navigation */
+navItems.forEach(item=>{
+  item.addEventListener("click",()=>{
+    const index=Number(item.dataset.index);
+    const distance=showcase.offsetHeight-window.innerHeight;
+    const top=showcase.offsetTop+(index/4)*distance;
+
+    window.scrollTo({
+      top,
+      behavior:"smooth"
+    });
+  });
+});
+
+/* Previous / next */
+function goToProject(index){
+  index=Math.max(0,Math.min(3,index));
+  const distance=showcase.offsetHeight-window.innerHeight;
+
+  window.scrollTo({
+    top:showcase.offsetTop+(index/4)*distance,
+    behavior:"smooth"
+  });
+}
+
+document.getElementById("prev").addEventListener("click",()=>goToProject(active-1));
+document.getElementById("next").addEventListener("click",()=>goToProject(active+1));
+
+/* Keyboard */
+window.addEventListener("keydown",e=>{
+  const tag=document.activeElement?.tagName;
+  if(tag==="INPUT" || tag==="TEXTAREA")return;
+
+  if(e.key==="ArrowRight" || e.key==="ArrowDown"){
+    e.preventDefault();
+    goToProject(active+1);
+  }
+
+  if(e.key==="ArrowLeft" || e.key==="ArrowUp"){
+    e.preventDefault();
+    goToProject(active-1);
+  }
+});
+
+/* Nav scroll state */
+const nav=document.getElementById("nav");
+window.addEventListener("scroll",()=>{
+  nav.classList.toggle("scrolled",window.scrollY>12);
+},{passive:true});
+
+setProject(0,false);
+update();
+</script>
+
+</body>
+</html>
