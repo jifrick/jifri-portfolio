@@ -1,6 +1,7 @@
 import React from 'react';
 import { SectionHeader } from '../components/SectionHeader';
 import { BeholdWidget } from '../components/BeholdWidget';
+import './CreativeWork.css';
 
 export const CreativeWork: React.FC = () => {
   return (

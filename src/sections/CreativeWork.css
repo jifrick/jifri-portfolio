@@ -1,0 +1,45 @@
+/* =========================
+   CREATIVE SECTION COMPACT VIEWPORT STYLING
+========================= */
+
+#creative {
+  padding: 60px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#creative .section-top {
+  margin-bottom: 24px;
+}
+
+.behold-widget-wrapper {
+  width: 100%;
+  max-height: min(500px, 60vh);
+  overflow-y: auto;
+  scrollbar-width: none;
+  border-radius: var(--radius-sm);
+}
+
+.behold-widget-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.behold-widget-wrapper behold-widget {
+  display: block;
+  width: 100%;
+}
+
+@media (max-width: 800px) {
+  #creative {
+    padding: 45px 0;
+  }
+
+  #creative .section-top {
+    margin-bottom: 20px;
+  }
+
+  .behold-widget-wrapper {
+    max-height: min(440px, 55vh);
+  }
+}
