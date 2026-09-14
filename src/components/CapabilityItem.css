@@ -1,0 +1,41 @@
+.cap-list {
+  border-top: 1px solid var(--border);
+}
+
+.cap {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr;
+  gap: 20px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+}
+
+.cap-num {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.cap-name {
+  font-size: 23px;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+
+.cap-desc {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+@media (max-width: 800px) {
+  .cap {
+    grid-template-columns: 50px 1fr;
+    gap: 12px;
+  }
+
+  .cap-desc {
+    grid-column: 2;
+  }
+}

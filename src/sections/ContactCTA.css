@@ -1,0 +1,28 @@
+.contact {
+  background: #ebe9e2;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+.contact h2 {
+  font-size: clamp(44px, 8vw, 100px);
+  letter-spacing: -0.07em;
+  line-height: 0.92;
+  margin: 0 auto;
+  max-width: 900px;
+  font-weight: 600;
+}
+
+.contact p {
+  color: var(--muted);
+  font-size: 18px;
+  margin: 28px auto 34px;
+  max-width: 520px;
+}
+
+@media (max-width: 800px) {
+  .contact p {
+    font-size: 16px;
+    margin: 20px auto 28px;
+  }
+}

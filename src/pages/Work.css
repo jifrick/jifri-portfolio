@@ -1,0 +1,36 @@
+.page-container {
+  padding-top: 140px;
+}
+
+.page-header {
+  padding-bottom: 60px;
+  border-bottom: 1px solid var(--border);
+}
+
+.work-section {
+  padding: 90px 0;
+}
+
+.additional-section {
+  border-top: 1px solid var(--border);
+}
+
+.creative-teaser-section {
+  padding: 100px 0;
+  background: #ebe9e2;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 800px) {
+  .page-container {
+    padding-top: 100px;
+  }
+
+  .page-header {
+    padding-bottom: 40px;
+  }
+
+  .work-section, .creative-teaser-section {
+    padding: 60px 0;
+  }
+}

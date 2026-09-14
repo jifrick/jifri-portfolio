@@ -1,0 +1,36 @@
+.currently {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 22px 0;
+}
+
+.currently-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.currently-label {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+}
+
+.currently-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+@media (max-width: 800px) {
+  .currently-inner {
+    display: block;
+  }
+
+  .currently-text {
+    display: block;
+    margin-top: 6px;
+  }
+}

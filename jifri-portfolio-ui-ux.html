@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="JIFRI — Full-Stack Developer portfolio UI/UX concept." />
+  <title>JIFRI — Full-Stack Developer</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg: #f7f6f2;
+      --text: #111111;
+      --muted: #6b6b67;
+      --border: #e2e1dc;
+      --accent: #d85a30;
+      --dark: #111111;
+      --dark-text: #f7f6f2;
+      --dark-muted: #a5a5a0;
+      --dark-border: #2a2a28;
+      --container: 1400px;
+      --ease: cubic-bezier(.22,1,.36,1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Instrument Sans", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    img { display: block; max-width: 100%; }
+
+    .container {
+      width: min(var(--container), calc(100% - 10vw));
+      margin: auto;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      z-index: 50;
+      inset: 0 0 auto;
+      height: 76px;
+      transition: .25s ease;
+    }
+    nav.scrolled {
+      background: rgba(247,246,242,.94);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+    .nav-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-weight: 700;
+      letter-spacing: -.05em;
+      font-size: 21px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .nav-links a:hover { color: var(--text); }
+    .menu-btn { display: none; border: 0; background: none; cursor: pointer; }
+
+    /* HERO */
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: flex-end;
+      padding: 150px 0 90px;
+    }
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    h1 {
+      max-width: 980px;
+      margin: 0;
+      font-size: clamp(52px, 7.2vw, 104px);
+      line-height: .94;
+      letter-spacing: -.065em;
+      font-weight: 600;
+    }
+    .hero-sub {
+      max-width: 650px;
+      margin: 34px 0 0;
+      font-size: 19px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 34px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      min-height: 48px;
+      padding: 0 21px;
+      border-radius: 999px;
+      border: 1px solid var(--text);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: transform .25s var(--ease), background .25s, color .25s;
+    }
+    .btn.primary { background: var(--text); color: var(--bg); }
+    .btn.secondary { background: transparent; }
+    .btn:hover { transform: translateY(-2px); }
+    .availability {
+      margin-top: 70px;
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* SECTION */
+    section { padding: 130px 0; }
+    .section-top {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      gap: 30px;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      margin-bottom: 70px;
+    }
+    .section-label {
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .section-title {
+      margin: 0;
+      font-size: clamp(34px, 4vw, 58px);
+      letter-spacing: -.055em;
+      line-height: 1;
+      font-weight: 600;
+      max-width: 760px;
+    }
+
+    /* CURRENTLY */
+    .currently {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 22px 0;
+    }
+    .currently-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+    }
+    .currently span:first-child {
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .12em;
+      font-weight: 600;
+    }
+    .currently span:last-child { font-size: 14px; }
+
+    /* WORK */
+    .project {
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      gap: 20px;
+      padding: 0 0 90px;
+    }
+    .project + .project {
+      padding-top: 90px;
+      border-top: 1px solid var(--border);
+    }
+    .project-num {
+      color: var(--muted);
+      font-size: 12px;
+      padding-top: 8px;
+    }
+    .project-main {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .project-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      align-items: end;
+    }
+    .project-title {
+      font-size: clamp(30px, 3.3vw, 50px);
+      letter-spacing: -.055em;
+      margin: 0 0 8px;
+      font-weight: 600;
+    }
+    .project-meta {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .status {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .status::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      display: inline-block;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-right: 7px;
+      vertical-align: 1px;
+    }
+    .project-image {
+      aspect-ratio: 16 / 10;
+      background: #e9e7e0;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+    .project-image::after {
+      content: "PROJECT PREVIEW";
+      position: absolute;
+      left: 22px;
+      bottom: 18px;
+      font-size: 10px;
+      letter-spacing: .12em;
+      color: rgba(17,17,17,.42);
+    }
+    .mock-ui {
+      position: absolute;
+      inset: 8%;
+      border: 1px solid rgba(17,17,17,.12);
+      background: rgba(247,246,242,.75);
+      padding: 24px;
+    }
+    .mock-top {
+      height: 9px;
+      width: 22%;
+      background: rgba(17,17,17,.12);
+      margin-bottom: 30px;
+    }
+    .mock-line { height: 8px; background: rgba(17,17,17,.08); margin: 10px 0; }
+    .mock-line.big { width: 65%; height: 22px; }
+    .mock-line.mid { width: 44%; }
+    .mock-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .mock-card {
+      height: 110px;
+      background: rgba(17,17,17,.07);
+      border: 1px solid rgba(17,17,17,.08);
+    }
+    .project-desc {
+      max-width: 720px;
+      font-size: 18px;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .project-link {
+      font-size: 14px;
+      width: fit-content;
+      border-bottom: 1px solid var(--text);
+      padding-bottom: 4px;
+      transition: color .2s, border-color .2s;
+    }
+    .project-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 10vw;
+      align-items: start;
+    }
+    .about-title {
+      font-size: clamp(38px, 5vw, 70px);
+      line-height: .98;
+      letter-spacing: -.06em;
+      margin: 0;
+      font-weight: 600;
+    }
+    .about-copy {
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--muted);
+      margin-top: 26px;
+      max-width: 650px;
+    }
+    .photo {
+      aspect-ratio: 4 / 5;
+      border-radius: 4px;
+      background: #dedcd5;
+      display: grid;
+      place-items: center;
+      color: #77746c;
+      font-size: 12px;
+      letter-spacing: .08em;
+    }
+
+    /* CAPABILITIES */
+    .cap-list { border-top: 1px solid var(--border); }
+    .cap {
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr;
+      gap: 20px;
+      padding: 26px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+    .cap-num { color: var(--muted); font-size: 12px; }
+    .cap-name { font-size: 23px; letter-spacing: -.03em; }
+    .cap-desc { color: var(--muted); font-size: 15px; line-height: 1.5; }
+
+    /* YAWMATIC */
+    .dark-section {
+      background: var(--dark);
+      color: var(--dark-text);
+      margin: 0;
+    }
+    .dark-section .section-top { border-color: var(--dark-border); }
+    .dark-section .section-label { color: var(--dark-muted); }
+    .dark-inner { padding: 130px 0; }
+    .yawmatic-mark {
+      font-size: clamp(52px, 9vw, 140px);
+      letter-spacing: -.08em;
+      line-height: .85;
+      font-weight: 600;
+      margin: 70px 0 40px;
+    }
+    .dark-copy {
+      max-width: 650px;
+      color: var(--dark-muted);
+      font-size: 19px;
+      line-height: 1.6;
+    }
+    .dark-link {
+      display: inline-flex;
+      margin-top: 30px;
+      color: var(--dark-text);
+      border-bottom: 1px solid var(--dark-text);
+      padding-bottom: 5px;
+    }
+    .dark-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* CREATIVE */
+    .creative-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .video {
+      aspect-ratio: 9 / 16;
+      background: #e5e3dc;
+      border-radius: 4px;
+      display: flex;
+      align-items: end;
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+    .video::before {
+      content: "JIFRIFLIX";
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      font-size: 10px;
+      letter-spacing: .12em;
+      color: rgba(17,17,17,.4);
+    }
+    .video-label {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* CONTACT */
+    .contact {
+      background: #ebe9e2;
+      text-align: center;
+    }
+    .contact h2 {
+      font-size: clamp(50px, 8vw, 110px);
+      letter-spacing: -.07em;
+      line-height: .9;
+      margin: 0 auto;
+      max-width: 1000px;
+    }
+    .contact p {
+      color: var(--muted);
+      font-size: 18px;
+      margin: 28px auto 34px;
+      max-width: 520px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      color: var(--dark-text);
+      padding: 55px 0;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+    }
+    .footer-brand { font-size: 25px; font-weight: 600; letter-spacing: -.05em; }
+    .footer-sub { color: var(--dark-muted); font-size: 13px; margin-top: 8px; }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      color: var(--dark-muted);
+      font-size: 13px;
+    }
+    .footer-links a:hover { color: var(--dark-text); }
+    .copyright {
+      border-top: 1px solid var(--dark-border);
+      margin-top: 50px;
+      padding-top: 18px;
+      color: var(--dark-muted);
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s var(--ease), transform .6s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 800px) {
+      .container { width: min(100% - 40px, var(--container)); }
+      nav { height: 68px; }
+      .nav-links { display: none; }
+      .menu-btn { display: block; font-size: 14px; color: var(--text); }
+      .hero { min-height: 88vh; padding: 120px 0 60px; }
+      h1 { font-size: clamp(46px, 13vw, 68px); }
+      .hero-sub { font-size: 16px; }
+      section { padding: 85px 0; }
+      .section-top { grid-template-columns: 1fr; gap: 14px; margin-bottom: 50px; }
+      .currently-inner { display: block; }
+      .currently span:last-child { display: block; margin-top: 8px; }
+      .project { grid-template-columns: 1fr; gap: 10px; padding-bottom: 65px; }
+      .project + .project { padding-top: 65px; }
+      .project-num { padding-top: 0; }
+      .project-head { display: block; }
+      .status { display: block; margin-top: 14px; }
+      .project-desc { font-size: 16px; }
+      .about-grid { grid-template-columns: 1fr; gap: 45px; }
+      .about-grid .photo { order: -1; max-width: 360px; }
+      .cap { grid-template-columns: 50px 1fr; }
+      .cap-desc { grid-column: 2; }
+      .dark-inner { padding: 85px 0; }
+      .yawmatic-mark { margin-top: 45px; }
+      .creative-grid { grid-template-columns: repeat(2, 1fr); }
+      .creative-grid .video:last-child { display: none; }
+      .footer-top, .copyright { display: block; }
+      .footer-links { margin-top: 25px; flex-wrap: wrap; }
+      .copyright span { display: block; margin-top: 8px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav id="navbar">
+    <div class="container nav-inner">
+      <a class="logo" href="#top" aria-label="Jifri home">JIFRI<span class="dot"></span></a>
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#creative">Creative</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="menu-btn" aria-label="Open menu">MENU</button>
+    </div>
+  </nav>
+
+  <main id="top">
+    <header class="hero">
+      <div class="container reveal">
+        <div class="eyebrow">Full-Stack Developer</div>
+        <h1>I design and build<br>digital experiences<br>for what’s next.</h1>
+        <p class="hero-sub">
+          Full-Stack Development · UI/UX · Digital Products · Creative Technology
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#work">View Work →</a>
+          <a class="btn secondary" href="#about">About Me</a>
+        </div>
+        <div class="availability"><span class="dot"></span> Based in India · Working globally</div>
+      </div>
+    </header>
+
+    <div class="currently">
+      <div class="container currently-inner">
+        <span>CURRENTLY</span>
+        <span>Building YAWMATIC, Rental Book &amp; WEBINVITE.IN.</span>
+      </div>
+    </div>
+
+    <section id="work">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="section-label">01 — Selected Work</div>
+          <h2 class="section-title">Real products, websites and digital experiences.</h2>
+        </div>
+
+        <article class="project reveal">
+          <div class="project-num">01</div>
+          <div class="project-main">
+            <div class="project-head">
+              <div>
+                <h3 class="project-title">YAWMATIC</h3>
+                <div class="project-meta">Creative Technology · Brand · Digital Experience</div>
+              </div>
+              <div class="status">Building</div>
+            </div>
+            <div class="project-image" aria-label="YAWMATIC project placeholder">
+              <div class="mock-ui">
+                <div class="mock-top"></div>
+                <div class="mock-line big"></div>
+                <div class="mock-line mid"></div>
+                <div class="mock-grid">
+                  <div class="mock-card"></div><div class="mock-card"></div><div class="mock-card"></div>
+                </div>
+              </div>
+            </div>
+            <p class="project-desc">Building a creative technology brand from the ground up.</p>
+            <a class="project-link" href="#contact">View Project →</a>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <div class="project-num">02</div>
+          <div class="project-main">
+            <div class="project-head">
+              <div>
+                <h3 class="project-title">Rental Book</h3>
+                <div class="project-meta">Rental Management · SaaS · Full-Stack Product</div>
+              </div>
+              <div class="status">Building</div>
+            </div>
+            <div class="project-image" aria-label="Rental Book project placeholder">
+              <div class="mock-ui">
+                <div class="mock-top"></div>
+                <div class="mock-line big"></div>
+                <div class="mock-line mid"></div>
+                <div class="mock-grid">
+                  <div class="mock-card"></div><div class="mock-card"></div><div class="mock-card"></div>
+                </div>
+              </div>
+            </div>
+            <p class="project-desc">Turning a real rental business into a digital product.</p>
+            <a class="project-link" href="#contact">View Project →</a>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <div class="project-num">03</div>
+          <div class="project-main">
+            <div class="project-head">
+              <div>
+                <h3 class="project-title">WEBINVITE.IN</h3>
+                <div class="project-meta">Event Technology · Digital Product</div>
+              </div>
+              <div class="status">Preparing for launch</div>
+            </div>
+            <div class="project-image" aria-label="WEBINVITE.IN project placeholder">
+              <div class="mock-ui">
+                <div class="mock-top"></div>
+                <div class="mock-line big"></div>
+                <div class="mock-line mid"></div>
+                <div class="mock-grid">
+                  <div class="mock-card"></div><div class="mock-card"></div><div class="mock-card"></div>
+                </div>
+              </div>
+            </div>
+            <p class="project-desc">Turning invitations into digital experiences.</p>
+            <a class="project-link" href="#contact">View Project →</a>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <div class="project-num">04</div>
+          <div class="project-main">
+            <div class="project-head">
+              <div>
+                <h3 class="project-title">Badrulhuda Academy</h3>
+                <div class="project-meta">Institutional Website · Client Project</div>
+              </div>
+              <div class="status">Live</div>
+            </div>
+            <div class="project-image" aria-label="Badrulhuda Academy project placeholder">
+              <div class="mock-ui">
+                <div class="mock-top"></div>
+                <div class="mock-line big"></div>
+                <div class="mock-line mid"></div>
+                <div class="mock-grid">
+                  <div class="mock-card"></div><div class="mock-card"></div><div class="mock-card"></div>
+                </div>
+              </div>
+            </div>
+            <p class="project-desc">A website I built for an institution I once studied at.</p>
+            <a class="project-link" href="#contact">View Project →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="section-label">02 — About</div>
+          <h2 class="section-title">I learn by building.</h2>
+        </div>
+        <div class="about-grid reveal">
+          <div>
+            <h3 class="about-title">Technology, design, creativity and entrepreneurship.</h3>
+            <p class="about-copy">
+              I’m Jifri, a full-stack developer and digital builder. I like turning ideas
+              into working products, websites and experiences — from the interface people
+              see to the systems and data behind it.
+            </p>
+            <p class="about-copy">
+              I learn by building, experimenting and solving real problems. I also explore
+              UI/UX, branding, content and creative technology through my own ventures and projects.
+            </p>
+            <a class="project-link" href="#contact">More About Me →</a>
+          </div>
+          <div class="photo">YOUR PHOTO · 4:5</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="section-label">03 — Capabilities</div>
+          <h2 class="section-title">I work across the product, not just one layer.</h2>
+        </div>
+
+        <div class="cap-list reveal">
+          <div class="cap">
+            <div class="cap-num">01</div>
+            <div class="cap-name">BUILD</div>
+            <div class="cap-desc">Full-Stack Development · React · TypeScript · APIs · Databases · Deployment</div>
+          </div>
+          <div class="cap">
+            <div class="cap-num">02</div>
+            <div class="cap-name">DESIGN</div>
+            <div class="cap-desc">UI/UX · Product Design · Web Design · Interaction</div>
+          </div>
+          <div class="cap">
+            <div class="cap-num">03</div>
+            <div class="cap-name">CREATE</div>
+            <div class="cap-desc">Branding · Visual Identity · Video · Content</div>
+          </div>
+          <div class="cap">
+            <div class="cap-num">04</div>
+            <div class="cap-name">EXPLORE</div>
+            <div class="cap-desc">AI Workflows · Creative Technology · Emerging Web</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-section" id="yawmatic">
+      <div class="container dark-inner">
+        <div class="section-top reveal">
+          <div class="section-label">04 — Venture</div>
+          <h2 class="section-title">Building something bigger.</h2>
+        </div>
+        <div class="yawmatic-mark reveal">YAWMATIC<span class="dot"></span></div>
+        <p class="dark-copy reveal">
+          YAWMATIC is my creative technology venture exploring design, technology
+          and digital experiences.
+        </p>
+        <a class="dark-link reveal" href="https://yawmatic.vercel.app" target="_blank" rel="noopener">Explore YAWMATIC →</a>
+      </div>
+    </section>
+
+    <section id="creative">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="section-label">05 — Creative</div>
+          <h2 class="section-title">Beyond the browser.</h2>
+        </div>
+        <div class="creative-grid reveal">
+          <div class="video"><div class="video-label">Short-form edit</div></div>
+          <div class="video"><div class="video-label">Visual storytelling</div></div>
+          <div class="video"><div class="video-label">Creative content</div></div>
+        </div>
+        <p class="hero-sub" style="margin-top:28px; font-size:15px;">
+          JIFRIFLIX · Video Editing · Creative Content · Visual Storytelling
+        </p>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container reveal">
+        <div class="section-label">06 — Contact</div>
+        <h2>LET’S BUILD<br>SOMETHING REAL.</h2>
+        <p>Have an idea worth building? Let’s turn it into something real.</p>
+        <a class="btn primary" href="mailto:hello@jifri.dev">Start a Conversation ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">JIFRI<span class="dot"></span></div>
+          <div class="footer-sub">Full-Stack Developer · Digital Product Builder</div>
+        </div>
+        <div class="footer-links">
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a href="#creative">Creative</a>
+          <a href="#contact">Contact</a>
+          <a href="https://github.com/jifrick" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.instagram.com/jifriflix/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+      <div class="copyright">
+        <span>© 2026 Jifri</span>
+        <span>Built with intention.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById("navbar");
+
+    window.addEventListener("scroll", () => {
+      nav.classList.toggle("scrolled", window.scrollY > 12);
+    }, { passive: true });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

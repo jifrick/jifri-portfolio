@@ -1,0 +1,127 @@
+.project-image {
+  aspect-ratio: 16 / 10;
+  background: #e9e7e0;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--border);
+  transition: transform var(--trans-smooth);
+}
+
+.project-image:hover {
+  transform: scale(1.012);
+}
+
+.project-screenshot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-image-badge {
+  position: absolute;
+  left: 22px;
+  bottom: 18px;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(17, 17, 17, 0.45);
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.mock-ui {
+  position: absolute;
+  inset: 7%;
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  background: rgba(247, 246, 242, 0.85);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.mock-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+}
+
+.mock-dot-group {
+  display: flex;
+  gap: 6px;
+}
+
+.mock-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(17, 17, 17, 0.18);
+}
+
+.mock-title-tag {
+  font-size: 11px;
+  color: var(--muted);
+  font-family: monospace;
+}
+
+.mock-line {
+  height: 8px;
+  background: rgba(17, 17, 17, 0.08);
+  margin: 8px 0;
+  border-radius: 2px;
+}
+
+.mock-line.big {
+  width: 65%;
+  height: 20px;
+  background: rgba(17, 17, 17, 0.15);
+  margin-bottom: 12px;
+}
+
+.mock-line.mid {
+  width: 44%;
+  height: 12px;
+}
+
+.mock-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 24px;
+  flex: 1;
+}
+
+.mock-card {
+  background: rgba(17, 17, 17, 0.04);
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: 4px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mock-card-line {
+  height: 8px;
+  background: rgba(17, 17, 17, 0.12);
+  border-radius: 2px;
+}
+
+.mock-card-line.short {
+  width: 60%;
+  background: rgba(17, 17, 17, 0.07);
+}
+
+@media (max-width: 600px) {
+  .mock-grid {
+    grid-template-columns: 1fr;
+  }
+  .mock-card:nth-child(n+2) {
+    display: none;
+  }
+}

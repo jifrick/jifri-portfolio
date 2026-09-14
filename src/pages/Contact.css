@@ -1,0 +1,146 @@
+.contact-form-section {
+  padding: 90px 0 130px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 8vw;
+  align-items: start;
+}
+
+.info-title {
+  font-size: clamp(28px, 3.5vw, 44px);
+  letter-spacing: -0.04em;
+  margin-bottom: 20px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.info-text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 40px;
+}
+
+.info-meta-label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.info-meta-val {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.form-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 40px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+
+.field-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  font-size: 15px;
+  color: var(--text);
+  transition: border-color var(--trans-fast), background-color var(--trans-fast);
+}
+
+.field-input:focus {
+  border-color: var(--text);
+  background: #ffffff;
+}
+
+.field-input.textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+.submit-btn {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.form-state {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.form-state.success-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.state-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--text);
+  color: var(--bg);
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.error-banner {
+  background: rgba(216, 90, 48, 0.1);
+  color: var(--accent);
+  border: 1px solid rgba(216, 90, 48, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.reset-btn {
+  margin-top: 12px;
+}
+
+@media (max-width: 800px) {
+  .contact-form-section {
+    padding: 60px 0 90px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .form-card {
+    padding: 24px;
+  }
+}

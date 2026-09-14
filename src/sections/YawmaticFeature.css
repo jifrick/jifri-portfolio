@@ -1,0 +1,50 @@
+.dark-section {
+  background: var(--dark);
+  color: var(--dark-text);
+  margin: 0;
+}
+
+.dark-section .section-top {
+  border-color: var(--dark-border);
+}
+
+.dark-section .section-label {
+  color: var(--dark-muted);
+}
+
+.dark-inner {
+  padding: 130px 0;
+}
+
+.yawmatic-mark {
+  font-size: clamp(48px, 9vw, 130px);
+  letter-spacing: -0.08em;
+  line-height: 0.85;
+  font-weight: 700;
+  margin: 60px 0 32px;
+  color: var(--dark-text);
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.dark-copy {
+  max-width: 650px;
+  color: var(--dark-muted);
+  font-size: 19px;
+  line-height: 1.6;
+}
+
+@media (max-width: 800px) {
+  .dark-inner {
+    padding: 85px 0;
+  }
+
+  .yawmatic-mark {
+    margin-top: 40px;
+  }
+
+  .dark-copy {
+    font-size: 16px;
+  }
+}
