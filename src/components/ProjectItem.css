@@ -35,6 +35,25 @@
   font-size: 14px;
 }
 
+.project-image-wrap {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(17, 17, 17, 0.08);
+}
+
+.project-card-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+  transition: transform var(--trans-smooth);
+}
+
+.project-image-wrap:hover .project-card-image {
+  transform: scale(1.015);
+}
+
 .project-desc {
   max-width: 720px;
   font-size: 18px;

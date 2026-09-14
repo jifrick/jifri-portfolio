@@ -97,6 +97,20 @@
   padding: 60px 0;
 }
 
+.detail-image-wrap {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(17, 17, 17, 0.08);
+}
+
+.detail-project-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+}
+
 .case-section {
   padding: 90px 0;
   border-top: 1px solid var(--border);

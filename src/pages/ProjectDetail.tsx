@@ -86,10 +86,21 @@ export const ProjectDetail: React.FC = () => {
           </div>
         </section>
 
-        {/* Main Mockup Banner */}
+        {/* Main Screenshot Banner */}
         <section className="banner-section">
           <div className="container reveal">
-            <ProjectMockup title={project.name} category={project.category} aspectRatio="16 / 9" />
+            {project.imageSrc ? (
+              <div className="detail-image-wrap">
+                <img
+                  src={project.imageSrc}
+                  alt={`${project.name} screenshot`}
+                  className="detail-project-image"
+                  loading="eager"
+                />
+              </div>
+            ) : (
+              <ProjectMockup title={project.name} category={project.category} aspectRatio="16 / 9" />
+            )}
           </div>
         </section>
 

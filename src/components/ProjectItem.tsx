@@ -23,7 +23,13 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({ project }) => {
         </div>
 
         <Link to={`/work/${project.id}`} aria-label={`View ${project.name} case study`}>
-          <ProjectMockup title={project.name} category={project.category} />
+          {project.imageSrc ? (
+            <div className="project-image-wrap">
+              <img src={project.imageSrc} alt={`${project.name} preview`} className="project-card-image" />
+            </div>
+          ) : (
+            <ProjectMockup title={project.name} category={project.category} />
+          )}
         </Link>
 
         <p className="project-desc">{project.coreHeadline}</p>
