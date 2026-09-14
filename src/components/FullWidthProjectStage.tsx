@@ -21,11 +21,37 @@ const THEME_MAP: Record<string, string> = {
 
 export const FullWidthProjectStage: React.FC = () => {
   const [active, setActive] = useState(0);
+  const [isChanging, setIsChanging] = useState(false);
   const [progress, setProgress] = useState(0);
 
   const showcaseRef = useRef<HTMLElement | null>(null);
+  const animTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const animTimeoutRef2 = useRef<ReturnType<typeof setTimeout> | null>(null);
   const activeRef = useRef(0);
   activeRef.current = active;
+
+  const currentProject = PRIMARY_PROJECTS[active] || PRIMARY_PROJECTS[0];
+
+  const changeProject = useCallback((index: number) => {
+    const clampedIndex = Math.max(0, Math.min(PRIMARY_PROJECTS.length - 1, index));
+    if (clampedIndex === activeRef.current) return;
+
+    if (animTimeoutRef.current) clearTimeout(animTimeoutRef.current);
+    if (animTimeoutRef2.current) clearTimeout(animTimeoutRef2.current);
+
+    // Step 1: Smooth fade out (mix transition start)
+    setIsChanging(true);
+
+    // Step 2: Switch project data at mid-mix (100ms)
+    animTimeoutRef.current = setTimeout(() => {
+      setActive(clampedIndex);
+
+      // Step 3: Smooth fade in with new project content
+      animTimeoutRef2.current = setTimeout(() => {
+        setIsChanging(false);
+      }, 120);
+    }, 100);
+  }, []);
 
   const updateFromScroll = useCallback(() => {
     if (!showcaseRef.current) return;
@@ -46,9 +72,9 @@ export const FullWidthProjectStage: React.FC = () => {
     );
 
     if (calculatedIndex !== activeRef.current) {
-      setActive(calculatedIndex);
+      changeProject(calculatedIndex);
     }
-  }, []);
+  }, [changeProject]);
 
   useEffect(() => {
     let ticking = false;
@@ -67,6 +93,8 @@ export const FullWidthProjectStage: React.FC = () => {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      if (animTimeoutRef.current) clearTimeout(animTimeoutRef.current);
+      if (animTimeoutRef2.current) clearTimeout(animTimeoutRef2.current);
     };
   }, [updateFromScroll]);
 
@@ -123,59 +151,39 @@ export const FullWidthProjectStage: React.FC = () => {
             </div>
           </div>
 
-          {/* Stacked Mix-Transition Visual Stage */}
-          <div className="project-visual-stage">
-            {PRIMARY_PROJECTS.map((proj, idx) => {
-              const isActive = idx === active;
-              return (
-                <div
-                  key={proj.id}
-                  className={`project-visual-slide ${THEME_MAP[proj.id] || 'yawmatic'} ${isActive ? 'active' : ''}`}
-                >
-                  <div className="browser">
-                    <div className="browser-top">
-                      <div className="browser-dots">
-                        <i></i><i></i><i></i>
-                      </div>
-                      <span>{DOMAIN_MAP[proj.id] || 'yawmatic.vercel.app'}</span>
-                    </div>
-
-                    <div className="mock-content">
-                      <div className="mock-title"></div>
-                      <div className="mock-sub"></div>
-                      <div className="mock-grid">
-                        <div className="mock-card"><span></span><span></span></div>
-                        <div className="mock-card"><span></span><span></span></div>
-                        <div className="mock-card"><span></span><span></span></div>
-                      </div>
-                    </div>
-                  </div>
+          {/* Large Project Visual */}
+          <div className={`project-visual ${THEME_MAP[currentProject.id] || 'yawmatic'} ${isChanging ? 'changing' : ''}`}>
+            <div className="browser">
+              <div className="browser-top">
+                <div className="browser-dots">
+                  <i></i><i></i><i></i>
                 </div>
-              );
-            })}
+                <span>{DOMAIN_MAP[currentProject.id] || 'yawmatic.vercel.app'}</span>
+              </div>
+
+              <div className="mock-content">
+                <div className="mock-title"></div>
+                <div className="mock-sub"></div>
+                <div className="mock-grid">
+                  <div className="mock-card"><span></span><span></span></div>
+                  <div className="mock-card"><span></span><span></span></div>
+                  <div className="mock-card"><span></span><span></span></div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Stacked Mix-Transition Info Stage */}
-          <div className="project-info-stage">
-            {PRIMARY_PROJECTS.map((proj, idx) => {
-              const isActive = idx === active;
-              return (
-                <div
-                  key={proj.id}
-                  className={`project-info-slide ${isActive ? 'active' : ''}`}
-                >
-                  <div>
-                    <h2 className="project-title">{proj.name}</h2>
-                    <div className="project-category">{proj.category}</div>
-                    <div className="project-status">{proj.status}</div>
-                  </div>
+          {/* Project Information */}
+          <div className={`project-info ${isChanging ? 'changing' : ''}`}>
+            <div>
+              <h2 className="project-title">{currentProject.name}</h2>
+              <div className="project-category">{currentProject.category}</div>
+              <div className="project-status">{currentProject.status}</div>
+            </div>
 
-                  <Link to={`/work/${proj.id}`} className="project-link">
-                    View Project ↗
-                  </Link>
-                </div>
-              );
-            })}
+            <Link to={`/work/${currentProject.id}`} className="project-link">
+              View Project ↗
+            </Link>
           </div>
 
           {/* Project Navigation */}

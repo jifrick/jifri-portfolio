@@ -1,5 +1,5 @@
 /* =========================
-   STICKY SHOWCASE (OPTION 2 MIX TRANSITION)
+   STICKY SHOWCASE (OPTION 2)
 ========================= */
 
 .work-showcase {
@@ -42,33 +42,25 @@
   font-weight: 500;
 }
 
-/* Stacked Visual Stage */
-.project-visual-stage {
+/* Main screenshot visual */
+.project-visual {
   width: 100%;
   position: relative;
+  overflow: hidden;
   aspect-ratio: 16 / 9;
   max-height: 66vh;
-}
-
-.project-visual-slide {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
   border: 1px solid #dad9d3;
   border-radius: var(--radius-sm);
   background: #e9e7e0;
   box-shadow: 0 24px 80px rgba(17, 17, 17, 0.09);
-  opacity: 0;
-  transform: scale(0.985);
-  pointer-events: none;
-  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+  transform: translateZ(0);
   will-change: opacity, transform;
+  transition: opacity 0.22s var(--ease), transform 0.26s var(--ease);
 }
 
-.project-visual-slide.active {
-  opacity: 1;
-  transform: scale(1);
-  pointer-events: auto;
+.project-visual.changing {
+  opacity: 0.18;
+  transform: scale(0.988);
 }
 
 /* Browser mockup frame */
@@ -150,101 +142,90 @@
 }
 
 /* Theme variations */
-.project-visual-slide.yawmatic .browser {
+.project-visual.yawmatic .browser {
   background: #0d0d0c;
   border-color: #292927;
 }
 
-.project-visual-slide.yawmatic .browser-top {
+.project-visual.yawmatic .browser-top {
   color: #999;
   border-color: #292927;
 }
 
-.project-visual-slide.yawmatic .mock-title {
+.project-visual.yawmatic .mock-title {
   width: 70%;
   height: 55px;
   background: #f7f6f2;
 }
 
-.project-visual-slide.yawmatic .mock-sub {
+.project-visual.yawmatic .mock-sub {
   width: 27%;
   background: var(--accent);
 }
 
-.project-visual-slide.yawmatic .mock-card {
+.project-visual.yawmatic .mock-card {
   background: #151514;
   border-color: #292927;
 }
 
-.project-visual-slide.yawmatic .mock-card span {
+.project-visual.yawmatic .mock-card span {
   background: #575753;
 }
 
-.project-visual-slide.rental .mock-title {
+.project-visual.rental .mock-title {
   width: 40%;
   height: 34px;
 }
 
-.project-visual-slide.rental .mock-grid {
+.project-visual.rental .mock-grid {
   grid-template-columns: 1.25fr 1fr 1fr 1fr;
 }
 
-.project-visual-slide.rental .mock-card {
+.project-visual.rental .mock-card {
   height: 130px;
 }
 
-.project-visual-slide.invite .mock-title {
+.project-visual.invite .mock-title {
   width: 45%;
   height: 55px;
 }
 
-.project-visual-slide.invite .mock-grid {
+.project-visual.invite .mock-grid {
   grid-template-columns: 1fr 1fr;
 }
 
-.project-visual-slide.invite .mock-card {
+.project-visual.invite .mock-card {
   height: 205px;
 }
 
-.project-visual-slide.academy .mock-title {
+.project-visual.academy .mock-title {
   width: 65%;
   height: 34px;
 }
 
-.project-visual-slide.academy .mock-grid {
+.project-visual.academy .mock-grid {
   grid-template-columns: repeat(4, 1fr);
 }
 
-.project-visual-slide.academy .mock-card {
+.project-visual.academy .mock-card {
   height: 135px;
 }
 
-/* Stacked Info Stage */
-.project-info-stage {
+/* Project Info */
+.project-info {
   width: 100%;
-  position: relative;
-  min-height: 110px;
-  margin-top: 25px;
-}
-
-.project-info-slide {
-  position: absolute;
-  inset: 0;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: end;
   gap: 30px;
-  opacity: 0;
-  transform: translateY(12px);
-  pointer-events: none;
-  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+  margin-top: 25px;
   will-change: opacity, transform;
+  transition: opacity 0.22s var(--ease), transform 0.26s var(--ease);
 }
 
-.project-info-slide.active {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+.project-info.changing {
+  opacity: 0.15;
+  transform: translateY(6px);
 }
 
 .project-title {
@@ -361,7 +342,7 @@
   height: 100%;
   background: var(--text);
   transform-origin: left;
-  transition: none;
+  transition: none; /* Instant 1:1 scroll tracking */
 }
 
 /* Responsive Overrides */
@@ -370,7 +351,7 @@
     width: calc(100% - 48px);
   }
 
-  .project-visual-stage {
+  .project-visual {
     max-height: 58vh;
   }
 
@@ -404,9 +385,10 @@
     margin: 0;
   }
 
-  .project-visual-stage {
+  .project-visual {
     aspect-ratio: 4 / 3;
     max-height: none;
+    box-shadow: 0 15px 45px rgba(17, 17, 17, 0.08);
   }
 
   .browser {
@@ -417,13 +399,10 @@
     height: 100px;
   }
 
-  .project-info-stage {
-    min-height: 120px;
-  }
-
-  .project-info-slide {
+  .project-info {
     grid-template-columns: 1fr;
     gap: 10px;
+    margin-top: 17px;
   }
 
   .project-title {
