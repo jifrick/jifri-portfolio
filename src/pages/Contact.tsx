@@ -15,6 +15,8 @@ export const Contact: React.FC = () => {
 
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({
       ...prev,
@@ -22,21 +24,45 @@ export const Contact: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       setStatus('error');
+      setErrorMessage('Please complete all required fields before submitting.');
       return;
     }
 
     setStatus('submitting');
 
-    // Simulate clean form submission state handling
-    setTimeout(() => {
-      setStatus('success');
-      setFormData({ name: '', email: '', message: '' });
-    }, 1000);
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/jifri.chakkalan@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _subject: `New Portfolio Message from ${formData.name}`,
+          _template: 'table',
+          _captcha: 'false'
+        })
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setStatus('error');
+        setErrorMessage('Failed to send message. Please try again or email jifri.chakkalan@gmail.com directly.');
+      }
+    } catch (err) {
+      setStatus('error');
+      setErrorMessage('Network error. Please try again or email jifri.chakkalan@gmail.com directly.');
+    }
   };
 
   return (
@@ -64,9 +90,21 @@ export const Contact: React.FC = () => {
                 <p className="info-text">
                   Whether you have a product idea, project in development, UI/UX design need, or technical exploration, feel free to reach out.
                 </p>
-                <div className="info-meta">
-                  <div className="info-meta-label">LOCATION</div>
-                  <div className="info-meta-val">Based in India · Working globally</div>
+
+                <div className="info-meta-group">
+                  <div className="info-meta">
+                    <div className="info-meta-label">DIRECT EMAIL</div>
+                    <div className="info-meta-val">
+                      <a href="mailto:jifri.chakkalan@gmail.com" className="email-link">
+                        jifri.chakkalan@gmail.com ↗
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="info-meta" style={{ marginTop: '20px' }}>
+                    <div className="info-meta-label">LOCATION</div>
+                    <div className="info-meta-val">Based in India · Working globally</div>
+                  </div>
                 </div>
               </div>
 
@@ -75,7 +113,7 @@ export const Contact: React.FC = () => {
                   <div className="form-state success-state">
                     <div className="state-icon">✓</div>
                     <h3>Message Sent</h3>
-                    <p>Thank you for reaching out. I'll get back to you as soon as possible.</p>
+                    <p>Thank you for reaching out. Your message has been sent to <strong>jifri.chakkalan@gmail.com</strong>. I will get back to you as soon as possible.</p>
                     <Button onClick={() => setStatus('idle')} variant="secondary" className="reset-btn">
                       Send another message
                     </Button>
@@ -84,7 +122,7 @@ export const Contact: React.FC = () => {
                   <form onSubmit={handleSubmit} className="contact-form" noValidate>
                     {status === 'error' && (
                       <div className="form-state error-banner">
-                        Please complete all required fields before submitting.
+                        {errorMessage || 'Please complete all required fields before submitting.'}
                       </div>
                     )}
 

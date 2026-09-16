@@ -38,6 +38,17 @@
   color: var(--text);
 }
 
+.email-link {
+  color: var(--text);
+  border-bottom: 1px solid var(--text);
+  transition: color var(--trans-fast), border-color var(--trans-fast);
+}
+
+.email-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
 .form-card {
   background: #ffffff;
   border: 1px solid var(--border);
