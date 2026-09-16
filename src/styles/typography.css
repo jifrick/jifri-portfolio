@@ -77,3 +77,30 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 12px;
   letter-spacing: 0.08em;
 }
+
+@media (max-width: 600px) {
+  .hero-title {
+    font-size: clamp(32px, 9vw, 52px);
+    letter-spacing: -0.05em;
+    overflow-wrap: break-word;
+  }
+
+  .page-title {
+    font-size: clamp(30px, 8vw, 44px);
+    letter-spacing: -0.05em;
+    overflow-wrap: break-word;
+  }
+
+  .section-title {
+    font-size: clamp(26px, 7vw, 38px);
+    letter-spacing: -0.04em;
+    overflow-wrap: break-word;
+  }
+
+  .project-title {
+    font-size: clamp(24px, 6.5vw, 34px);
+    letter-spacing: -0.04em;
+    overflow-wrap: break-word;
+  }
+}
+

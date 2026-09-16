@@ -151,7 +151,30 @@
     gap: 40px;
   }
 
+  .info-title {
+    font-size: clamp(24px, 6.5vw, 36px);
+    overflow-wrap: break-word;
+  }
+
+  .info-text {
+    font-size: 16px;
+    overflow-wrap: break-word;
+  }
+
+  .email-link {
+    word-break: break-all;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
   .form-card {
     padding: 24px;
   }
 }
+
+@media (max-width: 480px) {
+  .form-card {
+    padding: 18px 16px;
+  }
+}
+
