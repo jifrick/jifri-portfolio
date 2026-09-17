@@ -10,10 +10,14 @@ interface MobileMenuProps {
 
 export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
   const location = useLocation();
+  const prevPathnameRef = React.useRef(location.pathname);
 
   // Close menu on route change
   useEffect(() => {
-    onClose();
+    if (prevPathnameRef.current !== location.pathname) {
+      prevPathnameRef.current = location.pathname;
+      onClose();
+    }
   }, [location.pathname, onClose]);
 
   // Handle ESC key and scroll lock

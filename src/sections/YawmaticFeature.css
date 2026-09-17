@@ -42,19 +42,9 @@
 
   .yawmatic-mark {
     margin-top: 40px;
-    font-size: clamp(38px, 9vw, 84px);
-    overflow-wrap: break-word;
   }
 
   .dark-copy {
     font-size: 16px;
   }
 }
-
-@media (max-width: 600px) {
-  .yawmatic-mark {
-    font-size: clamp(28px, 8vw, 48px);
-    gap: 6px;
-  }
-}
-

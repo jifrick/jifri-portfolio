@@ -7,10 +7,15 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  background-color: var(--bg);
+  width: 100%;
 }
 
-body {
+body, #root {
   margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
   background-color: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
@@ -19,7 +24,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  overflow-wrap: break-word;
 }
 
 a {

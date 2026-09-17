@@ -9,8 +9,6 @@
   justify-content: space-between;
   padding: 24px var(--container-pad, 24px);
   animation: fadeIn 0.25s var(--ease) forwards;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 @keyframes fadeIn {
@@ -23,7 +21,6 @@
   align-items: center;
   justify-content: space-between;
   height: 48px;
-  flex-shrink: 0;
 }
 
 .close-btn {
@@ -41,23 +38,21 @@
   flex-direction: column;
   justify-content: space-between;
   flex: 1;
-  padding: 40px 0 30px;
-  min-height: 0;
+  padding: 60px 0 40px;
 }
 
 .mobile-menu-links {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
 }
 
 .mobile-nav-link {
-  font-size: clamp(32px, 8vw, 48px);
+  font-size: clamp(36px, 8vw, 52px);
   font-weight: 600;
   letter-spacing: -0.05em;
   color: var(--muted);
   transition: color var(--trans-fast);
-  overflow-wrap: break-word;
 }
 
 .mobile-nav-link:hover,

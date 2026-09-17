@@ -10,6 +10,14 @@ export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
+  const handleOpenMenu = React.useCallback(() => {
+    setMobileMenuOpen(true);
+  }, []);
+
+  const handleCloseMenu = React.useCallback(() => {
+    setMobileMenuOpen(false);
+  }, []);
+
   return (
     <>
       <nav id="navbar" className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
@@ -32,7 +40,7 @@ export const Navbar: React.FC = () => {
 
           <button
             className="menu-btn"
-            onClick={() => setMobileMenuOpen(true)}
+            onClick={handleOpenMenu}
             aria-label="Open mobile navigation menu"
           >
             MENU
@@ -42,7 +50,7 @@ export const Navbar: React.FC = () => {
 
       <MobileMenu
         isOpen={mobileMenuOpen}
-        onClose={() => setMobileMenuOpen(false)}
+        onClose={handleCloseMenu}
       />
     </>
   );

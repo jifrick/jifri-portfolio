@@ -311,43 +311,15 @@
 }
 
 @media (max-width: 600px) {
-  .project-detail-title {
-    font-size: clamp(28px, 8vw, 48px);
-    letter-spacing: -0.04em;
-    overflow-wrap: break-word;
-    word-break: break-word;
-  }
-
-  .project-headline {
-    font-size: clamp(16px, 4.5vw, 20px);
-  }
-
   .facts-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .fact-val, .links-val {
-    overflow-wrap: break-word;
-    word-break: break-word;
-  }
-
-  .case-heading {
-    font-size: clamp(24px, 6.5vw, 36px);
-    overflow-wrap: break-word;
-  }
-
-  .next-title, .next-arrow {
-    font-size: clamp(28px, 8vw, 48px);
-    overflow-wrap: break-word;
   }
 
   .banner-section {
-    padding: 24px 0;
+    padding: 30px 0;
   }
 
   .case-section {
-    padding: 50px 0;
+    padding: 60px 0;
   }
 }
-
