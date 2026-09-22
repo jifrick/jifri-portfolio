@@ -37,11 +37,12 @@
 
 @media (max-width: 800px) {
   .dark-inner {
-    padding: 85px 0;
+    padding: 55px 0;
   }
 
   .yawmatic-mark {
-    margin-top: 40px;
+    margin-top: 24px;
+    margin-bottom: 24px;
   }
 
   .dark-copy {

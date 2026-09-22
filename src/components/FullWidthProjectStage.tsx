@@ -29,7 +29,7 @@ export const FullWidthProjectStage: React.FC = () => {
     setProgress(currentProgress);
 
     const calculatedIndex = Math.min(
-      PRIMARY_PROJECTS.length - 1,
+      PRIMARY_PROJECTS.length - 1, 
       Math.floor(currentProgress * PRIMARY_PROJECTS.length)
     );
 
@@ -61,16 +61,20 @@ export const FullWidthProjectStage: React.FC = () => {
   const goToProject = (index: number) => {
     if (!showcaseRef.current) return;
     const clampedIndex = Math.max(0, Math.min(PRIMARY_PROJECTS.length - 1, index));
-    const distance = showcaseRef.current.offsetHeight - window.innerHeight;
-    const targetTop =
-      window.scrollY +
-      showcaseRef.current.getBoundingClientRect().top +
-      (clampedIndex / PRIMARY_PROJECTS.length) * distance;
+    setActive(clampedIndex);
 
-    window.scrollTo({
-      top: targetTop,
-      behavior: 'smooth'
-    });
+    const distance = showcaseRef.current.offsetHeight - window.innerHeight;
+    if (distance > 0) {
+      const targetTop =
+        window.scrollY +
+        showcaseRef.current.getBoundingClientRect().top +
+        (clampedIndex / PRIMARY_PROJECTS.length) * distance;
+
+      window.scrollTo({
+        top: targetTop,
+        behavior: 'smooth'
+      });
+    }
   };
 
   useEffect(() => {

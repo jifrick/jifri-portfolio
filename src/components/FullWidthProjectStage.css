@@ -260,25 +260,30 @@
 
 @media (max-width: 900px) {
   .work-showcase {
-    height: 320vh;
+    height: auto;
   }
 
   .work-sticky {
+    position: relative;
+    top: auto;
+    height: auto;
     min-height: 0;
+    overflow: visible;
   }
 
   .showcase-grid {
     width: calc(100% - 48px);
-    height: calc(100vh - 110px);
+    height: auto;
     grid-template-columns: 50px 1fr;
     grid-template-rows: auto 1fr auto;
     row-gap: 18px;
+    padding: 36px 0 20px;
   }
 
   .project-copy {
     grid-column: 2;
     grid-row: 1;
-    padding-top: 20px;
+    padding-top: 10px;
   }
 
   .project-title {
@@ -322,31 +327,35 @@
 
 @media (max-width: 600px) {
   .work-showcase {
-    height: 280vh;
+    height: auto;
   }
 
   .work-sticky {
-    height: 100svh;
-    min-height: 620px;
+    position: relative;
+    top: auto;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
   }
 
   .showcase-grid {
     width: calc(100% - 40px);
-    height: 100%;
-    padding: 58px 0 24px;
+    height: auto;
+    padding: 24px 0 16px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: stretch;
     gap: 14px;
   }
 
   .section-label {
-    top: 17px;
+    position: static;
   }
 
   .counter {
-    top: 17px;
+    position: absolute;
+    top: 24px;
     left: auto;
     right: 0;
   }
@@ -357,7 +366,7 @@
   }
 
   .project-title {
-    font-size: 40px;
+    font-size: 34px;
   }
 
   .category,
@@ -368,15 +377,15 @@
 
   .category {
     font-size: 13px;
-    margin-top: 14px;
+    margin-top: 10px;
   }
 
   .status {
-    margin-top: 12px;
+    margin-top: 8px;
   }
 
   .view {
-    margin-top: 20px;
+    margin-top: 14px;
   }
 
   .preview-wrap {
@@ -392,7 +401,8 @@
     display: flex;
     border-top: 1px solid var(--border);
     padding: 10px 0 0;
-    gap: 18px;
+    gap: 14px;
+    overflow-x: auto;
   }
 
   .project-nav {
