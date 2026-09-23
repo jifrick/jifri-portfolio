@@ -12,7 +12,7 @@ export const Footer: React.FC = () => {
             <Link to="/" className="footer-brand">
               JIFRI<span className="dot"></span>
             </Link>
-            <div className="footer-sub">Full-Stack Developer · Digital Product Builder</div>
+            <div className="footer-sub">Full-Stack Developer & Video Editor · Digital Builder</div>
           </div>
 
           <div className="footer-links">

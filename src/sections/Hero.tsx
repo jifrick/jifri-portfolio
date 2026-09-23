@@ -6,12 +6,12 @@ export const Hero: React.FC = () => {
   return (
     <header className="hero">
       <div className="container reveal">
-        <div className="eyebrow">FULL-STACK DEVELOPER</div>
+        <div className="eyebrow">FULL-STACK DEVELOPER & VIDEO EDITOR</div>
         <h1 className="hero-title">
           I build digital products <br />from idea to reality.
         </h1>
         <p className="hero-sub">
-          Full-Stack Development · UI/UX · Digital Products · Creative Technology
+          Full-Stack Development · Video Editing · UI/UX · Digital Products
         </p>
         <div className="hero-actions">
           <Button to="/work" variant="primary">

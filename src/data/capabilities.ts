@@ -20,9 +20,9 @@ export const CAPABILITIES: Capability[] = [
   },
   {
     number: '03',
-    name: 'CREATE',
-    description: 'Branding · Visual Identity · Video · Content',
-    items: ['Branding', 'Visual Identity', 'Video', 'Content']
+    name: 'CREATE & EDIT',
+    description: 'Video Editing · Short-Form Content · Visual Storytelling · Branding',
+    items: ['Video Editing', 'Short-Form Content', 'Visual Storytelling', 'Branding']
   },
   {
     number: '04',

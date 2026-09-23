@@ -6,8 +6,8 @@ interface SEOProps {
 }
 
 export const SEO: React.FC<SEOProps> = ({
-  title = 'JIFRI — Full-Stack Developer',
-  description = 'Full-Stack Development · UI/UX · Digital Products · Creative Technology. I build digital products from idea to reality.'
+  title = 'JIFRI — Full-Stack Developer & Video Editor',
+  description = 'Full-Stack Development · Video Editing · UI/UX · Digital Products. I build digital products and craft compelling visuals from idea to reality.'
 }) => {
   useEffect(() => {
     document.title = title.includes('JIFRI') ? title : `${title} — JIFRI`;

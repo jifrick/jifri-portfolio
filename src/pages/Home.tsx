@@ -16,8 +16,8 @@ export const Home: React.FC = () => {
   return (
     <>
       <SEO
-        title="JIFRI — Full-Stack Developer"
-        description="Full-Stack Development · UI/UX · Digital Products · Creative Technology. I build digital products from idea to reality."
+        title="JIFRI — Full-Stack Developer & Video Editor"
+        description="Full-Stack Development · Video Editing · UI/UX · Digital Products. I build digital products and craft video content from idea to reality."
       />
       <main id="top">
         <Hero />

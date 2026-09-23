@@ -12,14 +12,14 @@ export const About: React.FC = () => {
     { category: 'Frontend', items: ['React', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3', 'Vite'] },
     { category: 'Backend / Data', items: ['Supabase', 'PostgreSQL', 'Supabase Auth', 'REST APIs', 'Row Level Security'] },
     { category: 'Dev & Deployment', items: ['Git', 'GitHub', 'Vercel'] },
-    { category: 'Design & Creative', items: ['UI/UX Design', 'Product Design', 'Branding', 'CapCut Video Editing'] }
+    { category: 'Design & Video Creative', items: ['Video Editing & Motion', 'Short-Form Content', 'UI/UX Design', 'Product Design', 'Branding'] }
   ];
 
   return (
     <>
       <SEO
-        title="About Jifri — Full-Stack Developer"
-        description="Learn about Jifri's background across full-stack development, UI/UX design, creative technology, and entrepreneurship."
+        title="About Jifri — Full-Stack Developer & Video Editor"
+        description="Learn about Jifri's background across full-stack development, video editing, UI/UX design, creative technology, and entrepreneurship."
       />
       <main className="about-page page-container">
         <header className="page-header">
@@ -27,7 +27,7 @@ export const About: React.FC = () => {
             <div className="eyebrow">ABOUT JIFRI</div>
             <h1 className="page-title">I learn by building.</h1>
             <p className="body-large" style={{ marginTop: '24px', maxWidth: '720px' }}>
-              I'm Jifri, a full-stack developer and digital builder working across technology, design and creativity. I like turning ideas into working products, websites and experiences.
+              I'm Jifri, a full-stack developer, video editor, and digital builder working across technology, video production, design and creativity. I like turning ideas into working products, websites and engaging visual content.
             </p>
           </div>
         </header>
@@ -36,7 +36,7 @@ export const About: React.FC = () => {
           <div className="container">
             <div className="about-story-grid reveal">
               <div className="story-main">
-                <h2 className="story-heading">Technology × Design × Creativity × Entrepreneurship</h2>
+                <h2 className="story-heading">Technology × Video Editing × Design × Entrepreneurship</h2>
                 <p className="story-paragraph">
                   My work sits at the intersection of product engineering and visual design. Rather than specializing strictly in one narrow front-end or back-end silo, I operate across the full application lifecycle — from concept and interface architecture down to database schemas, authentication flow, and production deployment.
                 </p>
