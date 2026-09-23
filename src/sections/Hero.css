@@ -32,11 +32,12 @@
 
 @media (max-width: 800px) {
   .hero {
-    min-height: auto;
+    min-height: calc(100dvh - 68px);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 90px 0 32px;
+    padding: 40px 0 24px;
+    box-sizing: border-box;
     text-align: center;
   }
 
