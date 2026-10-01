@@ -1,22 +1,18 @@
 /* =========================
-   STICKY SHOWCASE — REBUILT DESIGN
+   CLEAN INTERACTIVE PROJECT SHOWCASE (ZERO BLANK SPACE)
    ========================= */
 
 .work-showcase {
   position: relative;
-  height: 220vh;
-  margin: 20px 0 60px;
-  padding: 0;
+  height: auto;
+  padding: 60px 0;
+  margin: 0;
 }
 
 .work-sticky {
-  position: sticky;
-  top: 80px;
-  height: calc(100vh - 100px);
-  min-height: 520px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: auto;
 }
 
 .showcase-container {
@@ -24,7 +20,7 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 /* TOP HEADER ROW */
@@ -32,7 +28,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 14px;
+  padding-bottom: 16px;
   border-bottom: 1px solid var(--border, #e2e1dc);
 }
 
@@ -53,10 +49,11 @@
 /* MAIN CONTENT GRID */
 .showcase-grid-body {
   display: grid;
-  grid-template-columns: minmax(260px, 340px) 1fr 160px;
-  column-gap: 32px;
+  grid-template-columns: minmax(260px, 340px) 1fr 180px;
+  column-gap: 36px;
   align-items: center;
-  padding: 12px 0;
+  padding: 16px 0;
+  min-height: 480px;
 }
 
 /* LEFT COLUMN: PROJECT COPY INFORMATION */
@@ -69,7 +66,7 @@
 .project-number {
   color: var(--muted, #6b6b67);
   font-size: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   font-weight: 500;
 }
 
@@ -90,7 +87,7 @@
 }
 
 .status {
-  margin-top: 10px;
+  margin-top: 12px;
   color: var(--muted, #6b6b67);
   font-size: 12px;
   display: flex;
@@ -109,7 +106,7 @@
 
 .view {
   display: inline-flex;
-  margin-top: 20px;
+  margin-top: 24px;
   padding-bottom: 4px;
   border-bottom: 1px solid var(--text, #111111);
   font-size: 14px;
@@ -144,11 +141,12 @@
   display: block;
   width: 100%;
   height: auto;
-  max-height: min(480px, calc(100vh - 240px));
+  max-height: 480px;
   object-fit: contain;
   border-radius: var(--radius-md, 6px);
   border: 1px solid var(--border, #e2e1dc);
   background-color: var(--dark, #1a1917);
+  transition: opacity 0.3s ease;
 }
 
 /* RIGHT COLUMN: NAVIGATION */
@@ -157,7 +155,7 @@
   padding-left: 20px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .project-nav {
@@ -196,12 +194,12 @@
 .arrows {
   display: flex;
   gap: 10px;
-  margin-top: 20px;
+  margin-top: 24px;
 }
 
 .arrow {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border: 1px solid var(--border, #e2e1dc);
   border-radius: 50%;
   background: transparent;
@@ -210,11 +208,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
 }
 
 .arrow:hover {
   border-color: var(--text, #111111);
+  background-color: rgba(17, 17, 17, 0.04);
   transform: translateY(-2px);
 }
 
@@ -223,27 +222,28 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 10px;
-}
-
-.hint {
-  color: var(--muted, #6b6b67);
-  font-size: 11px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border, #e2e1dc);
 }
 
 .progress {
   width: 100%;
   max-width: 320px;
-  height: 1px;
+  height: 2px;
   background: var(--border, #e2e1dc);
   overflow: hidden;
+  border-radius: 2px;
 }
 
 .progress-bar {
-  width: 0;
   height: 100%;
-  background: var(--text, #111111);
-  transition: width 0.05s linear;
+  background: var(--accent, #d85a30);
+  transition: width 0.3s ease;
+}
+
+.hint {
+  color: var(--muted, #6b6b67);
+  font-size: 11px;
 }
 
 /* RESPONSIVE BREAKPOINTS */
@@ -260,15 +260,7 @@
 
 @media (max-width: 880px) {
   .work-showcase {
-    height: auto;
-    margin: 20px 0 40px;
-  }
-
-  .work-sticky {
-    position: relative;
-    top: auto;
-    height: auto;
-    min-height: 0;
+    padding: 40px 0;
   }
 
   .showcase-container {
@@ -277,14 +269,15 @@
 
   .showcase-grid-body {
     grid-template-columns: 1fr;
-    row-gap: 20px;
+    row-gap: 24px;
     padding: 16px 0;
+    min-height: 0;
   }
 
   .project-navigation {
     border-left: 0;
     border-top: 1px solid var(--border, #e2e1dc);
-    padding: 14px 0 0;
+    padding: 16px 0 0;
     flex-direction: row;
     overflow-x: auto;
     gap: 16px;
@@ -295,7 +288,7 @@
     white-space: nowrap;
   }
 
-  .arrows, .progress {
+  .arrows {
     display: none;
   }
 }

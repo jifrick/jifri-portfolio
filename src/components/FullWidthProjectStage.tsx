@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { PROJECTS } from '../data/projects';
 import './FullWidthProjectStage.css';
@@ -7,74 +7,15 @@ const PRIMARY_PROJECTS = PROJECTS.filter((p) => p.isPrimary);
 
 export const FullWidthProjectStage: React.FC = () => {
   const [active, setActive] = useState(0);
-  const [progress, setProgress] = useState(0);
-
   const showcaseRef = useRef<HTMLElement | null>(null);
-  const activeRef = useRef(0);
-  activeRef.current = active;
 
   const currentProject = PRIMARY_PROJECTS[active] || PRIMARY_PROJECTS[0];
 
-  const updateFromScroll = useCallback(() => {
-    if (!showcaseRef.current) return;
-    const rect = showcaseRef.current.getBoundingClientRect();
-    const scrollDistance = showcaseRef.current.offsetHeight - window.innerHeight;
-
-    if (scrollDistance <= 0) {
-      setProgress(0);
-      return;
-    }
-
-    const currentProgress = Math.max(0, Math.min(0.999999, -rect.top / scrollDistance));
-    setProgress(currentProgress);
-
-    const calculatedIndex = Math.min(
-      PRIMARY_PROJECTS.length - 1, 
-      Math.floor(currentProgress * PRIMARY_PROJECTS.length)
-    );
-
-    if (calculatedIndex !== activeRef.current) {
-      setActive(calculatedIndex);
-    }
-  }, []);
-
-  useEffect(() => {
-    let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          updateFromScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    updateFromScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [updateFromScroll]);
-
   const goToProject = (index: number) => {
-    if (!showcaseRef.current) return;
-    const clampedIndex = Math.max(0, Math.min(PRIMARY_PROJECTS.length - 1, index));
-    setActive(clampedIndex);
-
-    const distance = showcaseRef.current.offsetHeight - window.innerHeight;
-    if (distance > 0) {
-      const targetTop =
-        window.scrollY +
-        showcaseRef.current.getBoundingClientRect().top +
-        (clampedIndex / PRIMARY_PROJECTS.length) * distance;
-
-      window.scrollTo({
-        top: targetTop,
-        behavior: 'smooth'
-      });
-    }
+    let nextIndex = index;
+    if (nextIndex < 0) nextIndex = PRIMARY_PROJECTS.length - 1;
+    if (nextIndex >= PRIMARY_PROJECTS.length) nextIndex = 0;
+    setActive(nextIndex);
   };
 
   useEffect(() => {
@@ -90,18 +31,18 @@ export const FullWidthProjectStage: React.FC = () => {
 
       if (!insideShowcase) return;
 
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-        e.preventDefault();
-        goToProject(activeRef.current + 1);
-      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-        e.preventDefault();
-        goToProject(activeRef.current - 1);
+      if (e.key === 'ArrowRight') {
+        goToProject(active + 1);
+      } else if (e.key === 'ArrowLeft') {
+        goToProject(active - 1);
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [active]);
+
+  const progressPercent = ((active + 1) / PRIMARY_PROJECTS.length) * 100;
 
   return (
     <section className="work-showcase" id="work" ref={showcaseRef}>
@@ -179,9 +120,9 @@ export const FullWidthProjectStage: React.FC = () => {
           {/* Bottom Bar */}
           <div className="showcase-bottom-bar">
             <div className="progress">
-              <div className="progress-bar" style={{ width: `${progress * 100}%` }}></div>
+              <div className="progress-bar" style={{ width: `${progressPercent}%` }}></div>
             </div>
-            <div className="hint">Scroll to explore ↓</div>
+            <div className="hint">Use buttons or arrows to switch projects →</div>
           </div>
         </div>
       </div>
