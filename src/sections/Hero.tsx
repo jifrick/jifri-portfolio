@@ -5,8 +5,8 @@ import './Hero.css';
 export const Hero: React.FC = () => {
   return (
     <header className="hero">
-      <div className="container reveal">
-        <div className="eyebrow">FULL-STACK DEVELOPER & VIDEO EDITOR</div>
+      <div className="container hero-content">
+        <div className="eyebrow">FULL-STACK DEVELOPER &amp; VIDEO EDITOR</div>
         <h1 className="hero-title">
           I build digital products <br />from idea to reality.
         </h1>

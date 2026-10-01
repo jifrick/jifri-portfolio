@@ -3,17 +3,17 @@
    ========================= */
 
 .work-showcase {
-  height: 200vh;
+  height: 180vh;
   position: relative;
   padding: 0;
-  margin: 40px 0 80px;
+  margin: 20px 0 40px;
 }
 
 .work-sticky {
   position: sticky;
   top: 76px;
   height: calc(100vh - 76px);
-  min-height: 580px;
+  min-height: 520px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -23,7 +23,7 @@
 .showcase-grid {
   position: relative;
   width: min(1400px, calc(100% - 8vw));
-  height: min(700px, calc(100vh - 140px));
+  height: min(680px, calc(100vh - 140px));
   margin: 0 auto;
   display: grid;
   grid-template-columns: 70px minmax(280px, 0.8fr) minmax(560px, 1.7fr) 180px;
@@ -141,7 +141,7 @@
 .project-image {
   display: block;
   width: 100%;
-  max-height: min(560px, calc(100vh - 220px));
+  max-height: min(540px, calc(100vh - 220px));
   object-fit: cover;
   border-radius: 6px;
   border: 1px solid var(--border);
