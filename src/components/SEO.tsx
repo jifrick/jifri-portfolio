@@ -6,11 +6,11 @@ interface SEOProps {
 }
 
 export const SEO: React.FC<SEOProps> = ({
-  title = 'JIFRI — Full-Stack Developer & Video Editor',
+  title = 'Jifri C.K. — Full-Stack Developer & Video Editor',
   description = 'Full-Stack Development · Video Editing · UI/UX · Digital Products. I build digital products and craft compelling visuals from idea to reality.'
 }) => {
   useEffect(() => {
-    document.title = title.includes('JIFRI') ? title : `${title} — JIFRI`;
+    document.title = title.includes('Jifri C.K.') ? title : `${title} — Jifri C.K.`;
 
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {

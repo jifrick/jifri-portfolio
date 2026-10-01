@@ -18,16 +18,16 @@ export const About: React.FC = () => {
   return (
     <>
       <SEO
-        title="About Jifri — Full-Stack Developer & Video Editor"
-        description="Learn about Jifri's background across full-stack development, video editing, UI/UX design, creative technology, and entrepreneurship."
+        title="About Jifri C.K. — Full-Stack Developer & Video Editor"
+        description="Learn about Jifri C.K.'s background across full-stack development, video editing, UI/UX design, creative technology, and entrepreneurship."
       />
       <main className="about-page page-container">
         <header className="page-header">
           <div className="container reveal">
-            <div className="eyebrow">ABOUT JIFRI</div>
+            <div className="eyebrow">ABOUT JIFRI C.K.</div>
             <h1 className="page-title">I learn by building.</h1>
             <p className="body-large" style={{ marginTop: '24px', maxWidth: '720px' }}>
-              I'm Jifri, a full-stack developer, video editor, and digital builder working across technology, video production, design and creativity. I like turning ideas into working products, websites and engaging visual content.
+              I'm Jifri C.K., a full-stack developer, video editor, and digital builder working across technology, video production, design and creativity. I like turning ideas into working products, websites and engaging visual content.
             </p>
           </div>
         </header>

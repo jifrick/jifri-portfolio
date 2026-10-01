@@ -83,7 +83,7 @@ export const PROJECTS: Project[] = [
     githubUrl: 'https://github.com/jifrick/YAWMATIC.git',
     isPrimary: true,
     imageSrc: '/assets/projects/yawmatic.webp',
-    aiDisclosure: 'Built independently with AI-assisted development workflows. AI was used as a development and learning aid for research, implementation assistance, debugging and exploring solutions. Product direction, UX decisions, architecture and final implementation were guided and reviewed by Jifri.'
+    aiDisclosure: 'Built independently with AI-assisted development workflows. AI was used as a development and learning aid for research, implementation assistance, debugging and exploring solutions. Product direction, UX decisions, architecture and final implementation were guided and reviewed by Jifri C.K.'
   },
   {
     id: 'rental-book',
@@ -125,7 +125,7 @@ export const PROJECTS: Project[] = [
     githubUrl: 'https://github.com/jifrick/rental-book',
     isPrimary: true,
     imageSrc: '/assets/projects/rental-book.webp',
-    aiDisclosure: 'Built independently with AI-assisted development workflows. AI was used as a development and learning aid for research, implementation assistance, debugging and exploring solutions. Product direction, UX decisions, architecture and final implementation were guided and reviewed by Jifri.',
+    aiDisclosure: 'Built independently with AI-assisted development workflows. AI was used as a development and learning aid for research, implementation assistance, debugging and exploring solutions. Product direction, UX decisions, architecture and final implementation were guided and reviewed by Jifri C.K.',
     deepTechnicalDetails: {
       realWorldProblem: 'Tool and machine rental businesses face operational friction tracking items across active rentals, managing deposits, recording equipment returns, and maintaining customer histories on paper.',
       coreWorkflow: [

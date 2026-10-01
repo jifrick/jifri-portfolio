@@ -47,7 +47,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
     <div className="mobile-menu-overlay" role="dialog" aria-modal="true" aria-label="Mobile Navigation Menu">
       <div className="mobile-menu-header">
         <Link to="/" className="logo" onClick={onClose}>
-          JIFRI<span className="dot"></span>
+          Jifri C.K.<span className="dot"></span>
         </Link>
         <button className="close-btn" onClick={onClose} aria-label="Close menu">
           CLOSE ✕

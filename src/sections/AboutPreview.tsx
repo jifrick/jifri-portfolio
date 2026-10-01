@@ -15,7 +15,7 @@ export const AboutPreview: React.FC = () => {
               Technology, design, creativity and entrepreneurship.
             </h3>
             <p className="about-copy">
-              I'm Jifri, a full-stack developer and digital builder working across technology, design and creativity. I like turning ideas into working products, websites and experiences — from the interface people see to the systems and data behind it.
+              I'm Jifri C.K., a full-stack developer and digital builder working across technology, design and creativity. I like turning ideas into working products, websites and experiences — from the interface people see to the systems and data behind it.
             </p>
             <p className="about-copy">
               I learn by building, experimenting and solving real problems. My work sits at the intersection of technology, design, creativity and entrepreneurship.

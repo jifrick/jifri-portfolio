@@ -13,7 +13,7 @@ export const Creative: React.FC = () => {
     <>
       <SEO
         title="JIFRIFLIX — Creative Work & Video Editing"
-        description="JIFRIFLIX creative content, short-form video editing, and visual storytelling by Jifri."
+        description="JIFRIFLIX creative content, short-form video editing, and visual storytelling by Jifri C.K."
       />
       <main className="creative-page page-container">
         <header className="page-header">

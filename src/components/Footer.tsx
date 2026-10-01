@@ -10,7 +10,7 @@ export const Footer: React.FC = () => {
         <div className="footer-top">
           <div>
             <Link to="/" className="footer-brand">
-              JIFRI<span className="dot"></span>
+              Jifri C.K.<span className="dot"></span>
             </Link>
             <div className="footer-sub">Full-Stack Developer & Video Editor · Digital Builder</div>
           </div>
@@ -35,7 +35,7 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="copyright">
-          <span>© 2026 Jifri</span>
+          <span>© 2026 Jifri C.K.</span>
           <span>Built with intention.</span>
         </div>
       </div>

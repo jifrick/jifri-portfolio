@@ -16,8 +16,8 @@ export const Work: React.FC = () => {
   return (
     <>
       <SEO
-        title="Selected Work — JIFRI"
-        description="Curated digital products, full-stack web applications, SaaS platforms, and digital experiences by Jifri."
+        title="Selected Work — Jifri C.K."
+        description="Curated digital products, full-stack web applications, SaaS platforms, and digital experiences by Jifri C.K."
       />
       <main className="work-page page-container">
         <header className="page-header">

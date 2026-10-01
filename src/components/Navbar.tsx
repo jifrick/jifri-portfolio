@@ -22,8 +22,8 @@ export const Navbar: React.FC = () => {
     <>
       <nav id="navbar" className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
         <div className="container nav-inner">
-          <Link to="/" className="logo" aria-label="Jifri Home">
-            JIFRI<span className="dot"></span>
+          <Link to="/" className="logo" aria-label="Jifri C.K. Home">
+            Jifri C.K.<span className="dot"></span>
           </Link>
 
           <div className="nav-links">

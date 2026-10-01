@@ -68,8 +68,8 @@ export const Contact: React.FC = () => {
   return (
     <>
       <SEO
-        title="Contact Jifri — Full-Stack Developer"
-        description="Have an idea worth building? Let's turn it into something real. Get in touch with Jifri."
+        title="Contact Jifri C.K. — Full-Stack Developer"
+        description="Have an idea worth building? Let's turn it into something real. Get in touch with Jifri C.K."
       />
       <main className="contact-page page-container">
         <header className="page-header">

@@ -27,7 +27,7 @@ export const ProjectDetail: React.FC = () => {
   return (
     <>
       <SEO
-        title={`${project.name} Case Study — JIFRI`}
+        title={`${project.name} Case Study — Jifri C.K.`}
         description={project.shortDescription}
       />
       
