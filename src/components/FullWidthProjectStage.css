@@ -1,30 +1,33 @@
 /* =========================
    STICKY SHOWCASE (OPTION 2 — PERFECT SIZE STICKY SHOWCASE)
-========================= */
+   ========================= */
 
 .work-showcase {
-  height: 300vh;
+  height: 200vh;
   position: relative;
+  padding: 0;
+  margin: 40px 0 80px;
 }
 
 .work-sticky {
   position: sticky;
-  top: 0;
-  height: 100vh;
-  min-height: 700px;
+  top: 76px;
+  height: calc(100vh - 76px);
+  min-height: 580px;
   overflow: hidden;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .showcase-grid {
   position: relative;
-  width: min(1500px, calc(100% - 8vw));
-  height: min(790px, calc(100vh - 120px));
+  width: min(1400px, calc(100% - 8vw));
+  height: min(700px, calc(100vh - 140px));
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 70px minmax(290px, 0.82fr) minmax(620px, 1.75fr) 180px;
-  column-gap: 28px;
+  grid-template-columns: 70px minmax(280px, 0.8fr) minmax(560px, 1.7fr) 180px;
+  column-gap: 24px;
   align-items: center;
 }
 
@@ -54,31 +57,31 @@
   grid-column: 2;
   align-self: center;
   min-width: 0;
-  padding-top: 10px;
+  padding-top: 20px;
 }
 
 .project-number {
   color: var(--muted);
   font-size: 12px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   font-weight: 500;
 }
 
 .project-title {
   margin: 0;
-  font-size: clamp(44px, 4vw, 66px);
-  line-height: 0.94;
-  letter-spacing: -0.065em;
+  font-size: clamp(38px, 3.6vw, 58px);
+  line-height: 0.96;
+  letter-spacing: -0.06em;
   font-weight: 600;
   overflow-wrap: anywhere;
 }
 
 .category {
   max-width: 300px;
-  margin-top: 16px;
+  margin-top: 14px;
   color: var(--muted);
   font-size: 14px;
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
 .status {
@@ -101,8 +104,8 @@
 
 .view {
   display: inline-flex;
-  margin-top: 24px;
-  padding-bottom: 5px;
+  margin-top: 20px;
+  padding-bottom: 4px;
   border-bottom: 1px solid var(--text);
   font-size: 14px;
   font-weight: 500;
@@ -119,6 +122,9 @@
   grid-column: 3;
   width: 100%;
   min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .preview {
@@ -127,7 +133,7 @@
   overflow: hidden;
   border-radius: 6px;
   background: transparent;
-  box-shadow: 0 20px 60px rgba(17, 17, 17, 0.12);
+  box-shadow: 0 16px 48px rgba(17, 17, 17, 0.1);
   transform: translateZ(0);
   transition: opacity 0.35s var(--ease), transform 0.45s var(--ease);
 }
@@ -135,8 +141,10 @@
 .project-image {
   display: block;
   width: 100%;
-  height: auto;
+  max-height: min(560px, calc(100vh - 220px));
+  object-fit: cover;
   border-radius: 6px;
+  border: 1px solid var(--border);
 }
 
 /* FAR-RIGHT COLUMN: PROJECT NAVIGATION */
@@ -229,7 +237,6 @@
   background: var(--text);
   transform-origin: left;
   transition: none;
-  /* Instant 1:1 scroll tracking */
 }
 
 /* RESPONSIVE OVERRIDES */
@@ -245,7 +252,7 @@
   }
 
   .project-title {
-    font-size: 48px;
+    font-size: 44px;
   }
 
   .project-navigation {
@@ -261,6 +268,7 @@
 @media (max-width: 900px) {
   .work-showcase {
     height: auto;
+    margin: 32px 0 48px;
   }
 
   .work-sticky {
@@ -287,7 +295,7 @@
   }
 
   .project-title {
-    font-size: 44px;
+    font-size: 40px;
   }
 
   .category,
@@ -328,6 +336,7 @@
 @media (max-width: 600px) {
   .work-showcase {
     height: auto;
+    margin: 24px 0 36px;
   }
 
   .work-sticky {
@@ -366,7 +375,7 @@
   }
 
   .project-title {
-    font-size: 34px;
+    font-size: 32px;
   }
 
   .category,
