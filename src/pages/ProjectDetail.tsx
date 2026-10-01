@@ -2,9 +2,11 @@ import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 import { PROJECTS, Project } from '../data/projects';
-import { ProjectMockup } from '../components/ProjectMockup';
-import { Button } from '../components/Button';
 import { useReveal } from '../hooks/useReveal';
+import { CaseStudyProgress } from '../components/case-study/CaseStudyProgress';
+import { ProjectFacts } from '../components/case-study/ProjectFacts';
+import { ProjectScreenshot } from '../components/case-study/ProjectScreenshot';
+import { NextProjectNav } from '../components/case-study/NextProjectNav';
 import './ProjectDetail.css';
 
 export const ProjectDetail: React.FC = () => {
@@ -17,9 +19,10 @@ export const ProjectDetail: React.FC = () => {
     return <Navigate to="/404" replace />;
   }
 
-  // Find next project for bottom navigation
   const currentIndex = PROJECTS.findIndex((p) => p.id === id);
   const nextProject: Project = PROJECTS[(currentIndex + 1) % PROJECTS.length];
+  const prevProject: Project = PROJECTS[(currentIndex - 1 + PROJECTS.length) % PROJECTS.length];
+  const totalCount = String(PROJECTS.length).padStart(2, '0');
 
   return (
     <>
@@ -27,150 +30,119 @@ export const ProjectDetail: React.FC = () => {
         title={`${project.name} Case Study — JIFRI`}
         description={project.shortDescription}
       />
-      <main className="project-detail-page page-container">
-        {/* Project Hero */}
-        <header className="project-hero">
+      
+      {/* Top minimal reading progress line */}
+      <CaseStudyProgress />
+
+      <main className="cs-page page-container">
+        {/* 01. PROJECT HERO */}
+        <header className="cs-hero-section">
           <div className="container reveal">
-            <div className="project-hero-top">
-              <Link to="/work" className="back-link">
+            <div className="cs-hero-top">
+              <Link to="/work" className="cs-back-link">
                 ← Back to Work
               </Link>
-              <div className="status-indicator">{project.status}</div>
+              <div className="cs-hero-counter">
+                {project.number} / {totalCount}
+              </div>
             </div>
 
-            <div className="project-hero-num">{project.number}</div>
-            <h1 className="project-detail-title">{project.name}</h1>
-            <p className="project-headline">{project.coreHeadline}</p>
+            <div className="cs-hero-main">
+              <h1 className="cs-project-title">{project.name}</h1>
+              <div className="cs-project-category">{project.category}</div>
+              <p className="cs-project-headline">{project.coreHeadline}</p>
+
+              <div className="cs-hero-actions">
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cs-action-link primary"
+                  >
+                    View Live ↗
+                  </a>
+                )}
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cs-action-link secondary"
+                  >
+                    GitHub ↗
+                  </a>
+                )}
+              </div>
+            </div>
           </div>
         </header>
 
-        {/* Project Facts Bar */}
-        <section className="facts-section">
-          <div className="container reveal">
-            <div className="facts-grid">
-              <div className="fact-item">
-                <div className="fact-label">ROLE</div>
-                <div className="fact-val">
-                  {project.role.map((r) => (
-                    <span key={r} className="role-tag">{r}</span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="fact-item">
-                <div className="fact-label">STATUS</div>
-                <div className="fact-val">{project.status}</div>
-              </div>
-
-              <div className="fact-item">
-                <div className="fact-label">TECHNOLOGY</div>
-                <div className="fact-val">
-                  {project.techStack.join(' · ')}
-                </div>
-              </div>
-
-              {(project.liveUrl || project.githubUrl) && (
-                <div className="fact-item">
-                  <div className="fact-label">LINKS</div>
-                  <div className="fact-val links-val">
-                    {project.liveUrl && (
-                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">Live Site ↗</a>
-                    )}
-                    {project.githubUrl && (
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">GitHub Repo ↗</a>
-                    )}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-
-        {/* Main Screenshot Banner */}
-        <section className="banner-section">
-          <div className="container reveal">
-            {project.imageSrc ? (
-              <div className="detail-image-wrap">
+        {/* 02. HERO SCREENSHOT (IMMEDIATELY AFTER HERO) */}
+        {project.imageSrc && (
+          <section className="cs-hero-image-section">
+            <div className="container reveal">
+              <div className="cs-hero-image-wrap">
                 <img
                   src={project.imageSrc}
-                  alt={`${project.name} screenshot`}
-                  className="detail-project-image"
+                  alt={`${project.name} main interface screenshot`}
+                  className="cs-hero-image"
                   loading="eager"
                 />
               </div>
-            ) : (
-              <ProjectMockup title={project.name} category={project.category} aspectRatio="16 / 9" />
-            )}
-          </div>
-        </section>
+            </div>
+          </section>
+        )}
 
-        {/* Overview & Context */}
-        <section className="case-section">
+        {/* 03. PROJECT FACTS */}
+        <ProjectFacts project={project} />
+
+        {/* 04. OVERVIEW */}
+        <section className="cs-section">
           <div className="container">
-            <div className="case-grid reveal">
-              <div className="case-label">OVERVIEW</div>
-              <div className="case-content">
-                <h2 className="case-heading">Project Context</h2>
-                <p className="case-body">{project.longDescription}</p>
+            <div className="cs-grid reveal">
+              <div className="cs-section-label">OVERVIEW</div>
+              <div className="cs-section-content">
+                <p className="cs-body-large">{project.longDescription}</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Deep Technical Case Study Details for Rental Book */}
-        {project.id === 'rental-book' && project.deepTechnicalDetails && (
-          <>
-            <section className="case-section dark-case">
-              <div className="container">
-                <div className="case-grid reveal">
-                  <div className="case-label dark-label">ARCHITECTURE</div>
-                  <div className="case-content">
-                    <h2 className="case-heading dark-heading">Database &amp; RLS Tenant Isolation</h2>
-                    <p className="case-body dark-body">
-                      {project.deepTechnicalDetails.realWorldProblem}
-                    </p>
-
-                    <div className="tech-callout-box">
-                      <div className="callout-label">TECHNICAL IMPLEMENTATION</div>
-                      <div className="callout-text">{project.deepTechnicalDetails.dbArchitecture}</div>
-                    </div>
-                  </div>
+        {/* 05. THE PROBLEM */}
+        {project.problem && (
+          <section className="cs-section">
+            <div className="container">
+              <div className="cs-grid reveal">
+                <div className="cs-section-label">THE PROBLEM</div>
+                <div className="cs-section-content">
+                  <h2 className="cs-heading">Operational &amp; Technical Challenge</h2>
+                  <p className="cs-body">{project.problem}</p>
                 </div>
               </div>
-            </section>
-
-            <section className="case-section">
-              <div className="container">
-                <div className="case-grid reveal">
-                  <div className="case-label">WORKFLOW</div>
-                  <div className="case-content">
-                    <h2 className="case-heading">Core Rental Product Flow</h2>
-                    <div className="workflow-steps">
-                      {project.deepTechnicalDetails.coreWorkflow.map((step, idx) => (
-                        <div key={step} className="workflow-step-item">
-                          <span className="step-num">0{idx + 1}</span>
-                          <span className="step-text">{step}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </>
+            </div>
+          </section>
         )}
 
-        {/* Confirmed Sections for Badrulhuda Academy */}
-        {project.confirmedSections && (
-          <section className="case-section">
+        {/* 06. THE APPROACH */}
+        {project.approachSteps && project.approachSteps.length > 0 && (
+          <section className="cs-section">
             <div className="container">
-              <div className="case-grid reveal">
-                <div className="case-label">SECTIONS</div>
-                <div className="case-content">
-                  <h2 className="case-heading">Information Architecture</h2>
-                  <div className="sections-grid">
-                    {project.confirmedSections.map((sec) => (
-                      <div key={sec} className="section-pill">{sec}</div>
+              <div className="cs-grid reveal">
+                <div className="cs-section-label">THE APPROACH</div>
+                <div className="cs-section-content">
+                  <h2 className="cs-heading">Strategy &amp; Product Workflow</h2>
+                  <div className="cs-approach-flow">
+                    {project.approachSteps.map((step, idx) => (
+                      <React.Fragment key={step}>
+                        <div className="cs-approach-step">
+                          <span className="step-index">0{idx + 1}</span>
+                          <span className="step-name">{step}</span>
+                        </div>
+                        {idx < project.approachSteps!.length - 1 && (
+                          <div className="cs-approach-arrow" aria-hidden="true">→</div>
+                        )}
+                      </React.Fragment>
                     ))}
                   </div>
                 </div>
@@ -179,49 +151,175 @@ export const ProjectDetail: React.FC = () => {
           </section>
         )}
 
-        {/* AI Assisted Disclosure */}
-        {project.aiDisclosure && (
-          <section className="case-section ai-disclosure-section">
+        {/* 07. PRODUCT / DESIGN STORY (REAL SCREENSHOTS) */}
+        {project.storySections && project.storySections.length > 0 && (
+          <section className="cs-section cs-story-sequence-section">
             <div className="container">
-              <div className="case-grid reveal">
-                <div className="case-label">DEVELOPMENT</div>
-                <div className="case-content">
-                  <h3 className="disclosure-heading">Development Workflow &amp; AI Integration</h3>
-                  <p className="disclosure-text">{project.aiDisclosure}</p>
+              <div className="cs-grid reveal">
+                <div className="cs-section-label">PRODUCT STORY</div>
+                <div className="cs-section-content">
+                  <h2 className="cs-heading">Product Interface &amp; Key Experiences</h2>
+                  <div className="cs-story-list">
+                    {project.storySections.map((storyItem, idx) => (
+                      <ProjectScreenshot key={idx} section={storyItem} index={idx} />
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </section>
         )}
 
-        {/* Project Links & Actions */}
-        <section className="case-actions-section">
-          <div className="container reveal">
-            <div className="actions-flex">
-              {project.liveUrl && (
-                <Button href={project.liveUrl} target="_blank" rel="noopener noreferrer" variant="primary">
-                  Visit Live Project ↗
-                </Button>
-              )}
-              {project.githubUrl && (
-                <Button href={project.githubUrl} target="_blank" rel="noopener noreferrer" variant="secondary">
-                  View Source Code ↗
-                </Button>
-              )}
+        {/* 08. DEVELOPMENT / TECHNOLOGY */}
+        <section className="cs-section">
+          <div className="container">
+            <div className="cs-grid reveal">
+              <div className="cs-section-label">DEVELOPMENT</div>
+              <div className="cs-section-content">
+                <h2 className="cs-heading">Technical Implementation</h2>
+                
+                {project.techDetailsGrid ? (
+                  <div className="cs-tech-grid">
+                    {project.techDetailsGrid.map((item) => (
+                      <div key={item.label} className="cs-tech-card">
+                        <div className="cs-tech-label">{item.label}</div>
+                        <div className="cs-tech-val">{item.value}</div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="cs-tech-tags">
+                    {project.techStack.map((tech) => (
+                      <span key={tech} className="cs-tech-pill">{tech}</span>
+                    ))}
+                  </div>
+                )}
+
+                {/* AI Disclosure if present */}
+                {project.aiDisclosure && (
+                  <div className="cs-ai-box">
+                    <div className="cs-ai-label">DEVELOPMENT WORKFLOW &amp; AI INTEGRATION</div>
+                    <p className="cs-ai-text">{project.aiDisclosure}</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Next Project Footer Nav */}
-        <section className="next-project-section">
-          <div className="container reveal">
-            <div className="next-label">NEXT PROJECT</div>
-            <Link to={`/work/${nextProject.id}`} className="next-link">
-              <span className="next-title">{nextProject.name}</span>
-              <span className="next-arrow">→</span>
-            </Link>
-          </div>
-        </section>
+        {/* 09. RLS / TECHNICAL ARCHITECTURE (Rental Book & deep technical projects) */}
+        {project.id === 'rental-book' && project.deepTechnicalDetails && (
+          <section className="cs-section cs-dark-section">
+            <div className="container">
+              <div className="cs-grid reveal">
+                <div className="cs-section-label dark">ARCHITECTURE</div>
+                <div className="cs-section-content">
+                  <h2 className="cs-heading dark">PostgreSQL Row Level Security (RLS) Tenant Isolation</h2>
+                  <p className="cs-body dark">
+                    {project.deepTechnicalDetails.realWorldProblem}
+                  </p>
+
+                  <div className="cs-arch-diagram">
+                    <div className="arch-node">SHOP WORKSPACE</div>
+                    <div className="arch-connector">↓</div>
+                    <div className="arch-node">AUTHENTICATED USER (JWT)</div>
+                    <div className="arch-connector">↓</div>
+                    <div className="arch-node">POSTGRESQL RLS POLICY FILTER</div>
+                    <div className="arch-connector">↓</div>
+                    <div className="arch-node">ISOLATED TENANT DATA (RENTALS / TOOLS / PAYMENTS)</div>
+                  </div>
+
+                  <div className="cs-arch-callout">
+                    <div className="callout-heading">DATABASE-LEVEL QUERY ISOLATION</div>
+                    <p className="callout-desc">{project.deepTechnicalDetails.dbArchitecture}</p>
+                  </div>
+
+                  <div className="cs-workflow-list">
+                    <div className="callout-heading" style={{ marginBottom: '16px' }}>TENANT WORKFLOW SEQUENCING</div>
+                    {project.deepTechnicalDetails.coreWorkflow.map((wfStep, idx) => (
+                      <div key={wfStep} className="cs-wf-item">
+                        <span className="wf-num">0{idx + 1}</span>
+                        <span className="wf-text">{wfStep}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Confirmed Sections for Badrulhuda Academy */}
+        {project.confirmedSections && (
+          <section className="cs-section">
+            <div className="container">
+              <div className="cs-grid reveal">
+                <div className="cs-section-label">STRUCTURE</div>
+                <div className="cs-section-content">
+                  <h2 className="cs-heading">Information Architecture</h2>
+                  <div className="cs-sections-grid">
+                    {project.confirmedSections.map((sec) => (
+                      <div key={sec} className="cs-section-chip">{sec}</div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* 10. OUTCOME */}
+        {project.outcome && (
+          <section className="cs-section">
+            <div className="container">
+              <div className="cs-grid reveal">
+                <div className="cs-section-label">OUTCOME</div>
+                <div className="cs-section-content">
+                  <h2 className="cs-heading">Project Result</h2>
+                  <p className="cs-body-large">{project.outcome}</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* 11. PROJECT LINKS */}
+        {(project.liveUrl || project.githubUrl) && (
+          <section className="cs-section cs-links-section">
+            <div className="container">
+              <div className="cs-grid reveal">
+                <div className="cs-section-label">PROJECT LINKS</div>
+                <div className="cs-section-content">
+                  <div className="cs-action-row">
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="cs-action-link primary"
+                      >
+                        Visit Live Project ↗
+                      </a>
+                    )}
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="cs-action-link secondary"
+                      >
+                        View Source Code ↗
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* 12. NEXT PROJECT */}
+        <NextProjectNav prevProject={prevProject} nextProject={nextProject} />
       </main>
     </>
   );

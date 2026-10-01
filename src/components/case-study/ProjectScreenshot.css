@@ -1,0 +1,85 @@
+.cs-story-block {
+  margin-top: 64px;
+}
+
+.cs-story-block:first-child {
+  margin-top: 0;
+}
+
+.cs-story-full {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.cs-story-header {
+  max-width: 720px;
+}
+
+.cs-eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted, #6b6b67);
+  margin-bottom: 12px;
+}
+
+.cs-story-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text, #111111);
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+
+.cs-story-desc {
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--muted, #6b6b67);
+  max-width: 680px;
+}
+
+.cs-full-media {
+  width: 100%;
+  margin: 0;
+}
+
+.cs-screenshot-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-md, 6px);
+  border: 1px solid var(--border, #e2e1dc);
+  background-color: var(--dark, #1a1917);
+}
+
+.cs-caption {
+  font-size: 0.875rem;
+  color: var(--muted, #6b6b67);
+  margin-top: 12px;
+}
+
+/* Grid Layouts (text-image & image-text) */
+.cs-story-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .cs-story-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+  }
+}
+
+.cs-story-copy {
+  max-width: 560px;
+}
+
+.cs-story-media {
+  width: 100%;
+}

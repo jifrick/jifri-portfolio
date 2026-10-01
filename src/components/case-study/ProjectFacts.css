@@ -1,0 +1,56 @@
+.cs-facts-section {
+  padding: 40px 0;
+  border-top: 1px solid var(--border, #e2e1dc);
+  border-bottom: 1px solid var(--border, #e2e1dc);
+  margin-top: 64px;
+  margin-bottom: 96px;
+}
+
+.cs-facts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px 24px;
+}
+
+@media (min-width: 900px) {
+  .cs-facts-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+}
+
+.cs-fact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cs-fact-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted, #6b6b67);
+}
+
+.cs-fact-val {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text, #111111);
+}
+
+.cs-status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cs-status-tag::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent, #d85a30);
+}
