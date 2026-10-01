@@ -8,6 +8,8 @@ const PRIMARY_PROJECTS = PROJECTS.filter((p) => p.isPrimary);
 export const FullWidthProjectStage: React.FC = () => {
   const [active, setActive] = useState(0);
   const showcaseRef = useRef<HTMLElement | null>(null);
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
 
   const currentProject = PRIMARY_PROJECTS[active] || PRIMARY_PROJECTS[0];
 
@@ -18,6 +20,7 @@ export const FullWidthProjectStage: React.FC = () => {
     setActive(nextIndex);
   };
 
+  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const activeElement = document.activeElement;
@@ -42,17 +45,70 @@ export const FullWidthProjectStage: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [active]);
 
+  // Touch swipe support for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    const distance = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50;
+
+    if (distance > minSwipeDistance) {
+      // Swiped left -> Next project
+      goToProject(active + 1);
+    } else if (distance < -minSwipeDistance) {
+      // Swiped right -> Prev project
+      goToProject(active - 1);
+    }
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
   const progressPercent = ((active + 1) / PRIMARY_PROJECTS.length) * 100;
 
   return (
-    <section className="work-showcase" id="work" ref={showcaseRef}>
+    <section
+      className="work-showcase"
+      id="work"
+      ref={showcaseRef}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className="work-sticky">
         <div className="showcase-container">
           {/* Top Bar */}
           <div className="showcase-top-bar">
             <div className="showcase-label">Selected Work</div>
-            <div className="showcase-counter">
-              {String(active + 1).padStart(2, '0')} / {String(PRIMARY_PROJECTS.length).padStart(2, '0')}
+            <div className="showcase-top-right">
+              <div className="showcase-counter">
+                {String(active + 1).padStart(2, '0')} / {String(PRIMARY_PROJECTS.length).padStart(2, '0')}
+              </div>
+              <div className="mobile-arrows">
+                <button
+                  type="button"
+                  className="arrow mobile-arrow"
+                  aria-label="Previous project"
+                  onClick={() => goToProject(active - 1)}
+                >
+                  ←
+                </button>
+                <button
+                  type="button"
+                  className="arrow mobile-arrow"
+                  aria-label="Next project"
+                  onClick={() => goToProject(active + 1)}
+                >
+                  →
+                </button>
+              </div>
             </div>
           </div>
 
@@ -96,7 +152,7 @@ export const FullWidthProjectStage: React.FC = () => {
                 </button>
               ))}
 
-              <div className="arrows">
+              <div className="arrows desktop-arrows">
                 <button
                   type="button"
                   className="arrow"
@@ -117,12 +173,26 @@ export const FullWidthProjectStage: React.FC = () => {
             </aside>
           </div>
 
+          {/* Mobile Horizontal Pill Navigation Bar */}
+          <div className="mobile-nav-bar" aria-label="Mobile project switcher">
+            {PRIMARY_PROJECTS.map((proj, idx) => (
+              <button
+                key={proj.id}
+                type="button"
+                className={`mobile-nav-chip ${idx === active ? 'active' : ''}`}
+                onClick={() => goToProject(idx)}
+              >
+                {proj.number} {proj.name}
+              </button>
+            ))}
+          </div>
+
           {/* Bottom Bar */}
           <div className="showcase-bottom-bar">
             <div className="progress">
               <div className="progress-bar" style={{ width: `${progressPercent}%` }}></div>
             </div>
-            <div className="hint">Use buttons or arrows to switch projects →</div>
+            <div className="hint">Swipe or tap arrows to view projects →</div>
           </div>
         </div>
       </div>
